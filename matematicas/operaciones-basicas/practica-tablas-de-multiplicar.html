@@ -362,9 +362,6 @@
                             aria-label="Ayuda de tablas">
                             💡
                         </button>
-                        <button id="btnMostrarRespuesta"
-                            class="rounded-xl border border-amber-200 bg-amber-50 px-5 py-3 text-lg font-bold text-amber-800 transition hover:bg-amber-100">Mostrar
-                            respuesta</button>
                     </div>
                 </div>
             </div>
@@ -526,7 +523,6 @@
         const tarjetaOperacion = document.getElementById('tarjetaOperacion');
         const btnNuevaOperacion = document.getElementById('btnNuevaOperacion');
         const btnAyudaTablas = document.getElementById('btnAyudaTablas');
-        const btnMostrarRespuesta = document.getElementById('btnMostrarRespuesta');
         const popupAyudaTablas = document.getElementById('popupAyudaTablas');
         const subtituloAyudaTablas = document.getElementById('subtituloAyudaTablas');
         const contenedorTablasAyuda = document.getElementById('contenedorTablasAyuda');
@@ -1219,20 +1215,6 @@
             } catch (e) { /* audio no disponible */ }
         }
 
-        function mostrarRespuesta() {
-            usoAyuda = true;
-            mascota.textContent = '🧠';
-
-            opcionesRespuesta.querySelectorAll('.boton-opcion-respuesta').forEach(function (boton) {
-                if (Number(boton.dataset.valor) === respuestaCorrecta) {
-                    boton.classList.add('border-amber-500', 'bg-amber-100', 'text-amber-800');
-                } else {
-                    boton.disabled = true;
-                    boton.classList.add('opacity-40');
-                }
-            });
-        }
-
         function establecerTextoOperacion(texto) {
             const textoElementoExistente = operacion.querySelector('.texto-operacion');
             const textoElemento = textoElementoExistente || document.createElement('span');
@@ -1457,7 +1439,6 @@
         });
 
         btnNuevaOperacion.addEventListener('click', generarOperacion);
-        btnMostrarRespuesta.addEventListener('click', mostrarRespuesta);
 
         const btnMenuHamburguesa = document.getElementById('btnMenuHamburguesa');
         const navPrincipal = document.getElementById('navPrincipal');
