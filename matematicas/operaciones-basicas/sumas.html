@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EHT1GP3HET"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EHT1GP3HET');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sumas - Mate Aventuras</title>
+    <meta name="description"
+        content="Aprende sobre las sumas, cómo practicarlas y consejos para dominarlas fácilmente." />
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-sky-200 via-fuchsia-100 to-amber-100 text-slate-800">
+    <div class="mx-auto max-w-5xl px-4 py-8">
+
+        <header class="mb-8 rounded-2xl border border-white/70 bg-white/85 p-5 shadow-lg backdrop-blur">
+            <div class="flex items-center justify-between gap-3">
+                <a href="../../index.html"
+                    class="text-2xl font-black text-fuchsia-700 hover:text-fuchsia-900 md:text-3xl">Mate Aventuras</a>
+                <button id="btnMenuHamburguesa"
+                    class="flex flex-col gap-1.5 rounded-xl border border-slate-200 bg-white p-2.5 md:hidden"
+                    aria-label="Abrir menú" aria-expanded="false" aria-controls="navPrincipal">
+                    <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                    <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                    <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                </button>
+            </div>
+            <nav id="navPrincipal" class="hidden mt-3 border-t border-slate-100 pt-3 md:block">
+                <ul class="flex flex-col gap-1 text-sm font-bold md:flex-row md:flex-wrap md:gap-2">
+                    <li><a href="../../index.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Inicio</a>
+                    </li>
+                    <li><a href="practicas.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-emerald-100 hover:text-emerald-700 transition">Practicar</a>
+                    </li>
+                    <li><a href="sumas.html"
+                            class="rounded-full bg-gradient-to-r from-cyan-100 to-sky-200 px-4 py-1.5 text-cyan-800 transition">Sumas</a>
+                    </li>
+                    <li><a href="restas.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Restas</a>
+                    </li>
+                    <li><a href="multiplicaciones.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Multiplicaciones</a>
+                    </li>
+                    <li><a href="divisiones.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Divisiones</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="mb-6 rounded-2xl border border-white/70 bg-white/85 p-7 shadow-lg backdrop-blur">
+            <p class="mb-2 text-sm font-black uppercase tracking-wide text-emerald-700">Operaciones básicas</p>
+            <div class="flex items-center gap-4">
+                <span class="text-6xl">➕</span>
+                <div>
+                    <h1 class="text-3xl font-black leading-tight text-fuchsia-800 md:text-4xl">La Suma</h1>
+                    <p class="mt-1 text-lg font-semibold text-slate-600">La primera operación que aprendemos</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid gap-6 md:grid-cols-2">
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">¿Qué es la suma?</h2>
+                <p class="mb-3 leading-relaxed text-slate-700">La suma es la operación matemática que consiste en
+                    <strong>unir dos o más cantidades</strong> para obtener un total. Se representa con el símbolo
+                    <strong>+</strong> y el resultado se llama <strong>suma</strong> o <strong>total</strong>.
+                </p>
+                <p class="mb-3 leading-relaxed text-slate-700">Por ejemplo, si tienes 3 manzanas y te dan 4 más, al
+                    sumar obtienes 7 manzanas en total:</p>
+                <div
+                    class="rounded-xl bg-gradient-to-r from-cyan-50 to-sky-100 p-4 text-center text-3xl font-black text-slate-800">
+                    3 + 4 = 7
+                </div>
+                <p class="mt-3 leading-relaxed text-slate-700">Las partes de una suma son los <strong>sumandos</strong>
+                    (los números que se unen) y el <strong>resultado</strong>. El orden de los sumandos no cambia el
+                    resultado: 3 + 4 es lo mismo que 4 + 3.</p>
+            </section>
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">¿Para qué sirve sumar?</h2>
+                <p class="mb-3 leading-relaxed text-slate-700">La suma está presente en nuestra vida todos los días. La
+                    usamos para:</p>
+                <ul class="space-y-2 text-slate-700">
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">🛒</span><span>Calcular el total de
+                            precios al hacer compras.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">🎂</span><span>Saber cuántos años
+                            cumpliremos sumando los que ya tenemos.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">📚</span><span>Contar el total de
+                            páginas que hemos leído en distintos días.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">⚽</span><span>Llevar el marcador de
+                            un partido sumando los goles de cada equipo.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">🏠</span><span>Saber cuántos
+                            miembros hay en casa cuando llegan visitas.</span></li>
+                </ul>
+            </section>
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">Tipos de sumas</h2>
+                <div class="space-y-4">
+                    <div class="rounded-xl bg-gradient-to-br from-emerald-50 to-cyan-50 p-4">
+                        <p class="font-black text-emerald-700">Sumas sin llevadas</p>
+                        <p class="mt-1 text-sm text-slate-600">Cuando la suma de cada columna no supera el 9. Son las
+                            más fáciles de resolver. Ej: 23 + 15 = 38.</p>
+                    </div>
+                    <div class="rounded-xl bg-gradient-to-br from-fuchsia-50 to-pink-50 p-4">
+                        <p class="font-black text-fuchsia-700">Sumas con llevadas</p>
+                        <p class="mt-1 text-sm text-slate-600">Cuando alguna columna supera el 9 y hay que "llevar" una
+                            cifra a la siguiente columna. Ej: 47 + 36 = 83.</p>
+                    </div>
+                    <div class="rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 p-4">
+                        <p class="font-black text-amber-700">Sumas de varios sumandos</p>
+                        <p class="mt-1 text-sm text-slate-600">Se pueden sumar tres o más números a la vez. Se resuelven
+                            de izquierda a derecha o agrupando los que suman 10.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">💡 Consejos para aprender sumas</h2>
+                <ul class="space-y-3 text-slate-700">
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-fuchsia-100 text-sm font-black text-fuchsia-700">1</span>
+                        <span><strong>Empieza con objetos reales.</strong> Usa frijoles, monedas o fichas para sumar
+                            físicamente. Ver y tocar ayuda a entender el concepto.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cyan-100 text-sm font-black text-cyan-700">2</span>
+                        <span><strong>Memoriza los pares que suman 10.</strong> 1+9, 2+8, 3+7, 4+6, 5+5. Esto acelera
+                            todos los cálculos que siguen.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-sm font-black text-emerald-700">3</span>
+                        <span><strong>Practica 10 minutos al día.</strong> La constancia es más poderosa que estudiar
+                            mucho una sola vez. Pequeñas sesiones diarias forman el hábito.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-100 text-sm font-black text-amber-700">4</span>
+                        <span><strong>Agrupa mentalmente.</strong> Para sumar 8 + 7, piensa: "8 + 2 = 10, me quedan 5,
+                            entonces 10 + 5 = 15". Descomponer los números simplifica la suma.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pink-100 text-sm font-black text-pink-700">5</span>
+                        <span><strong>Juega con Mate Aventuras.</strong> La práctica con retroalimentación inmediata
+                            refuerza lo aprendido y hace que sumar sea divertido.</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur md:col-span-2">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">Estrategias mentales para sumar más rápido</h2>
+                <div class="grid gap-4 sm:grid-cols-3">
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center">
+                        <p class="text-3xl">🔟</p>
+                        <p class="mt-2 font-black text-slate-800">Completar decenas</p>
+                        <p class="mt-1 text-sm text-slate-600">Lleva el primer número a la decena más cercana y suma el
+                            resto. 36 + 7 → 36 + 4 + 3 = 43.</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center">
+                        <p class="text-3xl">🔄</p>
+                        <p class="mt-2 font-black text-slate-800">Cambiar el orden</p>
+                        <p class="mt-1 text-sm text-slate-600">Suma siempre el número más grande primero. Es más fácil
+                            hacer 9 + 3 que 3 + 9 contando hacia adelante.</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center">
+                        <p class="text-3xl">✂️</p>
+                        <p class="mt-2 font-black text-slate-800">Descomponer sumandos</p>
+                        <p class="mt-1 text-sm text-slate-600">Separa los números por decenas y unidades. 34 + 52 →
+                            (30+50) + (4+2) = 80 + 6 = 86.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="practicas.html"
+                class="inline-block rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-8 py-3 text-lg font-bold text-white shadow-md transition hover:scale-[1.02] hover:from-fuchsia-600 hover:to-cyan-600">
+                ¡Practicar sumas en Mate Aventuras!
+            </a>
+        </div>
+
+        <footer class="mt-8 text-center text-sm font-semibold text-slate-500">
+            © 2026 Mate Aventuras · Matemáticas para primaria
+        </footer>
+    </div>
+    <script>
+        var btnMenuHamburguesa = document.getElementById('btnMenuHamburguesa');
+        var navPrincipal = document.getElementById('navPrincipal');
+        btnMenuHamburguesa.addEventListener('click', function () {
+            var estaAbierto = !navPrincipal.classList.contains('hidden');
+            navPrincipal.classList.toggle('hidden', estaAbierto);
+            btnMenuHamburguesa.setAttribute('aria-expanded', estaAbierto ? 'false' : 'true');
+        });
+    </script>
+</body>
+
+</html>

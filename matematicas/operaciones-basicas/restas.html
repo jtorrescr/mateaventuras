@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EHT1GP3HET"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EHT1GP3HET');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restas - Mate Aventuras</title>
+    <meta name="description"
+        content="Aprende sobre las restas, cómo practicarlas y consejos para dominarlas fácilmente." />
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-sky-200 via-fuchsia-100 to-amber-100 text-slate-800">
+    <div class="mx-auto max-w-5xl px-4 py-8">
+
+        <header class="mb-8 rounded-2xl border border-white/70 bg-white/85 p-5 shadow-lg backdrop-blur">
+            <div class="flex items-center justify-between gap-3">
+                <a href="../../index.html"
+                    class="text-2xl font-black text-fuchsia-700 hover:text-fuchsia-900 md:text-3xl">Mate Aventuras</a>
+                <button id="btnMenuHamburguesa"
+                    class="flex flex-col gap-1.5 rounded-xl border border-slate-200 bg-white p-2.5 md:hidden"
+                    aria-label="Abrir menú" aria-expanded="false" aria-controls="navPrincipal">
+                    <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                    <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                    <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                </button>
+            </div>
+            <nav id="navPrincipal" class="hidden mt-3 border-t border-slate-100 pt-3 md:block">
+                <ul class="flex flex-col gap-1 text-sm font-bold md:flex-row md:flex-wrap md:gap-2">
+                    <li><a href="../../index.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Inicio</a>
+                    </li>
+                    <li><a href="practicas.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-emerald-100 hover:text-emerald-700 transition">Practicar</a>
+                    </li>
+                    <li><a href="sumas.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Sumas</a>
+                    </li>
+                    <li><a href="restas.html"
+                            class="rounded-full bg-gradient-to-r from-pink-100 to-rose-200 px-4 py-1.5 text-rose-800 transition">Restas</a>
+                    </li>
+                    <li><a href="multiplicaciones.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Multiplicaciones</a>
+                    </li>
+                    <li><a href="divisiones.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Divisiones</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="mb-6 rounded-2xl border border-white/70 bg-white/85 p-7 shadow-lg backdrop-blur">
+            <p class="mb-2 text-sm font-black uppercase tracking-wide text-emerald-700">Operaciones básicas</p>
+            <div class="flex items-center gap-4">
+                <span class="text-6xl">➖</span>
+                <div>
+                    <h1 class="text-3xl font-black leading-tight text-fuchsia-800 md:text-4xl">La Resta</h1>
+                    <p class="mt-1 text-lg font-semibold text-slate-600">La operación de quitar o comparar cantidades
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid gap-6 md:grid-cols-2">
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">¿Qué es la resta?</h2>
+                <p class="mb-3 leading-relaxed text-slate-700">La resta es la operación matemática que consiste en
+                    <strong>quitar una cantidad de otra</strong> para saber cuánto queda. Se representa con el símbolo
+                    <strong>−</strong> y el resultado se llama <strong>diferencia</strong>.
+                </p>
+                <p class="mb-3 leading-relaxed text-slate-700">Por ejemplo, si tienes 9 galletas y te comes 4, al restar
+                    sabes que quedan 5:</p>
+                <div
+                    class="rounded-xl bg-gradient-to-r from-pink-50 to-rose-100 p-4 text-center text-3xl font-black text-slate-800">
+                    9 − 4 = 5
+                </div>
+                <p class="mt-3 leading-relaxed text-slate-700">Las partes de una resta son el <strong>minuendo</strong>
+                    (el número del que quitamos), el <strong>sustraendo</strong> (lo que quitamos) y la
+                    <strong>diferencia</strong> (el resultado). A diferencia de la suma, <em>el orden sí importa</em>.
+                </p>
+            </section>
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">¿Para qué sirve restar?</h2>
+                <p class="mb-3 leading-relaxed text-slate-700">La resta nos ayuda a resolver muchas situaciones
+                    cotidianas:</p>
+                <ul class="space-y-2 text-slate-700">
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">💰</span><span>Saber cuánto cambio
+                            nos deben después de pagar algo.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">📏</span><span>Calcular la
+                            diferencia de estatura o peso entre dos personas.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">🕐</span><span>Descubrir cuánto
+                            tiempo falta para que termine una película.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">🍕</span><span>Saber cuántas
+                            porciones de pizza quedan después de comer varias.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">🎮</span><span>Calcular cuántos
+                            puntos necesitas para alcanzar la meta en un juego.</span></li>
+                </ul>
+            </section>
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">Tipos de restas</h2>
+                <div class="space-y-4">
+                    <div class="rounded-xl bg-gradient-to-br from-emerald-50 to-cyan-50 p-4">
+                        <p class="font-black text-emerald-700">Restas sin préstamo</p>
+                        <p class="mt-1 text-sm text-slate-600">Cada dígito del minuendo es mayor o igual al del
+                            sustraendo. Son las más directas. Ej: 76 − 34 = 42.</p>
+                    </div>
+                    <div class="rounded-xl bg-gradient-to-br from-fuchsia-50 to-pink-50 p-4">
+                        <p class="font-black text-fuchsia-700">Restas con préstamo</p>
+                        <p class="mt-1 text-sm text-slate-600">Cuando un dígito del sustraendo es mayor al del minuendo
+                            hay que "pedir prestado" a la columna siguiente. Ej: 53 − 27 = 26.</p>
+                    </div>
+                    <div class="rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 p-4">
+                        <p class="font-black text-amber-700">Resta como comparación</p>
+                        <p class="mt-1 text-sm text-slate-600">Se usa para saber cuánto le falta a un número para llegar
+                            a otro. Ej: ¿Cuánto le falta a 45 para llegar a 80? 80 − 45 = 35.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">💡 Consejos para aprender restas</h2>
+                <ul class="space-y-3 text-slate-700">
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-fuchsia-100 text-sm font-black text-fuchsia-700">1</span>
+                        <span><strong>Aprende la suma primero.</strong> La resta y la suma son operaciones inversas. Si
+                            sabes que 5 + 4 = 9, entonces sabes que 9 − 4 = 5 automáticamente.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cyan-100 text-sm font-black text-cyan-700">2</span>
+                        <span><strong>Usa la recta numérica.</strong> Dibuja una línea con números y salta hacia atrás.
+                            Visualizar el movimiento hace el concepto muy claro.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-sm font-black text-emerald-700">3</span>
+                        <span><strong>Verifica con la suma.</strong> Si hiciste 15 − 8 = 7, comprueba sumando 7 + 8 =
+                            15. Esto detecta errores y refuerza ambas operaciones.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-100 text-sm font-black text-amber-700">4</span>
+                        <span><strong>Practica el "complemento a 10".</strong> Saber cuánto le falta a cada número para
+                            llegar a 10 acelera las restas mentales.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pink-100 text-sm font-black text-pink-700">5</span>
+                        <span><strong>Practica todos los días.</strong> Dedica 10 minutos al día a resolver restas en
+                            Mate Aventuras. La repetición construye la velocidad y la seguridad.</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur md:col-span-2">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">Estrategias mentales para restar más rápido</h2>
+                <div class="grid gap-4 sm:grid-cols-3">
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center">
+                        <p class="text-3xl">⬇️</p>
+                        <p class="mt-2 font-black text-slate-800">Restar por partes</p>
+                        <p class="mt-1 text-sm text-slate-600">Descompón el sustraendo. 54 − 18 → primero resta 10 (=
+                            44), luego resta 8 (= 36). Más fácil en dos pasos.</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center">
+                        <p class="text-3xl">🔼</p>
+                        <p class="mt-2 font-black text-slate-800">Contar hacia arriba</p>
+                        <p class="mt-1 text-sm text-slate-600">En vez de quitar, cuenta desde el número menor hasta el
+                            mayor. ¿Cuánto es 13 − 8? Cuenta desde 8 hasta 13: son 5.</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center">
+                        <p class="text-3xl">🔃</p>
+                        <p class="mt-2 font-black text-slate-800">Redondear y ajustar</p>
+                        <p class="mt-1 text-sm text-slate-600">Redondea al número más fácil. 72 − 39 → resta 40 (= 32) y
+                            suma 1 de ajuste (= 33). ¡Más rápido!</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="practicas.html"
+                class="inline-block rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-8 py-3 text-lg font-bold text-white shadow-md transition hover:scale-[1.02] hover:from-fuchsia-600 hover:to-cyan-600">
+                ¡Practicar restas en Mate Aventuras!
+            </a>
+        </div>
+
+        <footer class="mt-8 text-center text-sm font-semibold text-slate-500">
+            © 2026 Mate Aventuras · Matemáticas para primaria
+        </footer>
+    </div>
+    <script>
+        var btnMenuHamburguesa = document.getElementById('btnMenuHamburguesa');
+        var navPrincipal = document.getElementById('navPrincipal');
+        btnMenuHamburguesa.addEventListener('click', function () {
+            var estaAbierto = !navPrincipal.classList.contains('hidden');
+            navPrincipal.classList.toggle('hidden', estaAbierto);
+            btnMenuHamburguesa.setAttribute('aria-expanded', estaAbierto ? 'false' : 'true');
+        });
+    </script>
+</body>
+
+</html>

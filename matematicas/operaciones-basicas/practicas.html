@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EHT1GP3HET"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EHT1GP3HET');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mate Aventuras - Práctica de Matemáticas para Niños de Escuela Primaria</title>
+    <meta name="description"
+        content="Mate Aventuras: practica sumas, restas, multiplicaciones, divisiones y tablas de multiplicar de forma divertida. Ideal para niños de primaria." />
+    <meta property="og:title" content="Mate Aventuras - Práctica de Matemáticas" />
+    <meta property="og:description"
+        content="Practica operaciones matemáticas y tablas de multiplicar con niveles de dificultad. Gratis para niños de primaria." />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="https://mateaventuras.com/" />
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes saltar {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @keyframes brillar {
+            0% {
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+
+            50% {
+                box-shadow: 0 0 24px rgba(34, 197, 94, 0.35);
+            }
+
+            100% {
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+        }
+
+        @keyframes caerConfeti {
+            0% {
+                transform: translateY(-24px) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(190px) rotate(560deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes errorTemblor {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-8px);
+            }
+
+            40% {
+                transform: translateX(7px);
+            }
+
+            60% {
+                transform: translateX(-5px);
+            }
+
+            80% {
+                transform: translateX(4px);
+            }
+        }
+
+        @keyframes errorFlash {
+            0% {
+                background-color: #ffffff;
+                border-color: rgb(226 232 240);
+                box-shadow: 0 0 0 rgba(239, 68, 68, 0);
+            }
+
+            35% {
+                background-color: #fee2e2;
+                border-color: rgb(248 113 113);
+                box-shadow: 0 0 0 5px rgba(248, 113, 113, 0.22);
+            }
+
+            100% {
+                background-color: #ffffff;
+                border-color: rgb(226 232 240);
+                box-shadow: 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+
+        .saltar {
+            animation: saltar 0.45s ease-in-out;
+        }
+
+        .brillar {
+            animation: brillar 0.7s ease-in-out;
+        }
+
+        .operacion-con-confeti {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .texto-operacion {
+            position: relative;
+            z-index: 2;
+        }
+
+        .capa-confeti {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .pieza-confeti {
+            position: absolute;
+            top: -24px;
+            width: 9px;
+            height: 16px;
+            border-radius: 2px;
+            animation-name: caerConfeti;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
+        }
+
+        .operacion-incorrecta {
+            animation: errorTemblor 0.42s ease-out, errorFlash 0.68s ease-out;
+        }
+
+        @keyframes arcoirisPersonaje {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .personaje-seleccionado-arcoiris {
+            border-color: transparent;
+            background-image: linear-gradient(120deg,
+                    #f43f5e,
+                    #fb7185,
+                    #f59e0b,
+                    #facc15,
+                    #22c55e,
+                    #06b6d4,
+                    #3b82f6,
+                    #8b5cf6,
+                    #f43f5e);
+            background-size: 320% 320%;
+            animation: arcoirisPersonaje 2.2s linear infinite;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.85), 0 10px 20px rgba(59, 130, 246, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .operacion-item-seleccionado {
+            border-color: transparent;
+            background-image: linear-gradient(120deg,
+                    #22c55e,
+                    #06b6d4,
+                    #3b82f6,
+                    #8b5cf6,
+                    #ec4899);
+            color: #ffffff;
+            box-shadow: 0 8px 18px rgba(56, 189, 248, 0.28);
+            transform: translateY(-1px);
+        }
+
+        .rueda-tabla {
+            position: relative;
+            margin: 0 auto;
+            height: 18rem;
+            width: 18rem;
+            border-radius: 9999px;
+            background:
+                repeating-conic-gradient(from -90deg,
+                    rgba(255, 255, 255, 0.85) 0deg 1deg,
+                    transparent 1deg 36deg),
+                radial-gradient(circle,
+                    #ffffff 0 3.25rem,
+                    #0ea5e9 3.25rem 6.15rem,
+                    #ffffff 6.15rem 8.7rem,
+                    #0ea5e9 8.7rem 100%);
+            border: 6px solid #0ea5e9;
+            box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.95), 0 10px 28px rgba(2, 132, 199, 0.2);
+        }
+
+        .nodo-rueda {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .nodo-centro {
+            height: 5.25rem;
+            width: 5.25rem;
+            background: white;
+            color: #0284c7;
+            font-size: 2rem;
+            box-shadow: 0 6px 18px rgba(14, 165, 233, 0.28);
+        }
+
+        .nodo-interior {
+            height: 2.1rem;
+            width: 2.1rem;
+            background: transparent;
+            color: white;
+            font-size: 1.55rem;
+            text-shadow: 0 2px 6px rgba(3, 105, 161, 0.5);
+        }
+
+        .nodo-exterior {
+            height: 2.9rem;
+            width: 2.9rem;
+            background: transparent;
+            color: #0284c7;
+            font-size: 1.95rem;
+            text-shadow: 0 2px 3px rgba(255, 255, 255, 0.9);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-sky-200 via-fuchsia-100 to-amber-100 text-slate-800">
+    <main class="mx-auto max-w-5xl px-4 py-8">
+        <header class="mb-8 rounded-2xl border border-white/70 bg-white/85 p-5 shadow-lg backdrop-blur">
+            <div class="flex items-center justify-between gap-3">
+                <h1 class="text-2xl font-black text-fuchsia-700 md:text-3xl">Mate Aventuras</h1>
+                <div class="flex items-center gap-2">
+                    <p
+                        class="hidden rounded-full bg-gradient-to-r from-cyan-100 to-pink-100 px-3 py-1 text-sm font-bold text-cyan-700 sm:block">
+                        Matemáticas con calma
+                    </p>
+                    <button id="btnMenuHamburguesa"
+                        class="flex flex-col gap-1.5 rounded-xl border border-slate-200 bg-white p-2.5 md:hidden"
+                        aria-label="Abrir menú" aria-expanded="false" aria-controls="navPrincipal">
+                        <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                        <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                        <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                    </button>
+                </div>
+            </div>
+            <nav id="navPrincipal" class="hidden mt-3 border-t border-slate-100 pt-3 md:block">
+                <ul class="flex flex-col gap-1 text-sm font-bold md:flex-row md:flex-wrap md:gap-2">
+                    <li><a href="../../index.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-cyan-100 hover:text-cyan-700 transition">Inicio</a>
+                    </li>
+                    <li><span
+                            class="rounded-full bg-gradient-to-r from-emerald-100 to-lime-100 px-4 py-1.5 text-emerald-800">Practicar</span>
+                    </li>
+                    <li><a href="sumas.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-cyan-100 hover:text-cyan-700 transition">Sumas</a>
+                    </li>
+                    <li><a href="restas.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-pink-100 hover:text-rose-700 transition">Restas</a>
+                    </li>
+                    <li><a href="multiplicaciones.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Multiplicaciones</a>
+                    </li>
+                    <li><a href="divisiones.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-amber-100 hover:text-amber-700 transition">Divisiones</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="pantallaUsuarios"
+            class="rounded-2xl border border-white/70 bg-white/85 p-7 shadow-lg backdrop-blur">
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-sm font-black uppercase tracking-wide text-cyan-700">Paso 1 de 3</p>
+                    <h2 class="text-2xl font-black text-slate-900">Selecciona tu usuario</h2>
+                </div>
+                <a href="../../index.html"
+                    class="rounded-xl border border-cyan-200 bg-cyan-50 px-4 py-2 font-bold text-cyan-700 hover:bg-cyan-100">
+                    Volver al inicio
+                </a>
+            </div>
+
+            <div class="mt-6 grid gap-5 md:grid-cols-[1fr_1.4fr]">
+                <div class="rounded-2xl bg-gradient-to-br from-cyan-50 to-blue-50 p-5">
+                    <label for="nuevoNickname" class="mb-2 block font-bold text-slate-700">Crear nuevo usuario</label>
+                    <div class="flex gap-2">
+                        <input id="nuevoNickname" type="text" maxlength="15"
+                            class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-lg font-bold outline-none focus:border-slate-500"
+                            placeholder="Ej: Ana" />
+                        <button id="btnCrearJugador"
+                            class="rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-4 py-2 font-bold text-white shadow-sm hover:from-emerald-600 hover:to-teal-600">Crear</button>
+                    </div>
+                    <p class="mt-2 text-sm text-slate-500">Crea perfiles para que cada estudiante conserve su progreso.
+                    </p>
+                </div>
+
+                <div>
+                    <p class="mb-3 text-lg font-black text-slate-800">Usuarios guardados</p>
+                    <div id="listaJugadores" class="space-y-3"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pantallaConfiguracion"
+            class="hidden rounded-2xl border border-white/70 bg-white/85 p-7 shadow-lg backdrop-blur">
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-sm font-black uppercase tracking-wide text-indigo-700">Paso 2 de 3</p>
+                    <h2 class="text-2xl font-black text-slate-900">Configuración de práctica</h2>
+                    <p id="textoJugadorConfiguracion" class="mt-1 font-semibold text-slate-600">Jugador: Sin seleccionar
+                    </p>
+                </div>
+                <button id="btnVolverUsuarios"
+                    class="rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-2 font-bold text-indigo-700 hover:bg-indigo-100">
+                    Cambiar usuario
+                </button>
+            </div>
+
+            <div class="mt-6 grid gap-5 lg:grid-cols-2">
+                <div class="rounded-2xl bg-gradient-to-br from-indigo-50 to-fuchsia-50 p-5">
+                    <p class="mb-3 font-black text-slate-800">Personaje</p>
+                    <div id="selectorPersonajes" class="grid grid-cols-4 gap-2 sm:grid-cols-8">
+                        <button
+                            class="boton-personaje min-h-14 rounded-xl border border-slate-200 bg-white p-2 text-3xl hover:bg-slate-100"
+                            data-personaje="🦊">🦊</button>
+                        <button
+                            class="boton-personaje min-h-14 rounded-xl border border-slate-200 bg-white p-2 text-3xl hover:bg-slate-100"
+                            data-personaje="🐶">🐶</button>
+                        <button
+                            class="boton-personaje min-h-14 rounded-xl border border-slate-200 bg-white p-2 text-3xl hover:bg-slate-100"
+                            data-personaje="🐱">🐱</button>
+                        <button
+                            class="boton-personaje min-h-14 rounded-xl border border-slate-200 bg-white p-2 text-3xl hover:bg-slate-100"
+                            data-personaje="🐼">🐼</button>
+                        <button
+                            class="boton-personaje min-h-14 rounded-xl border border-slate-200 bg-white p-2 text-3xl hover:bg-slate-100"
+                            data-personaje="🦁">🦁</button>
+                        <button
+                            class="boton-personaje min-h-14 rounded-xl border border-slate-200 bg-white p-2 text-3xl hover:bg-slate-100"
+                            data-personaje="🐸">🐸</button>
+                        <button
+                            class="boton-personaje min-h-14 rounded-xl border border-slate-200 bg-white p-2 text-3xl hover:bg-slate-100"
+                            data-personaje="🦄">🦄</button>
+                        <button
+                            class="boton-personaje min-h-14 rounded-xl border border-slate-200 bg-white p-2 text-3xl hover:bg-slate-100"
+                            data-personaje="🤖">🤖</button>
+                    </div>
+                    <p id="vistaPersonaje" class="mt-3 text-center text-6xl font-black leading-none text-slate-700">🦊
+                    </p>
+                </div>
+
+                <div class="rounded-2xl bg-slate-50 p-5">
+                    <label for="cantidadDigitos" class="mb-2 block font-bold text-slate-700">Nivel de dificultad</label>
+                    <select id="cantidadDigitos"
+                        class="w-full rounded-xl border border-slate-300 bg-white p-3 font-bold outline-none focus:border-slate-500">
+                        <option value="muyfacil">Muy fácil: 2 x 2</option>
+                        <option value="facil">Fácil: 22 x 2</option>
+                        <option value="intermedio">Intermedio: 222 x 2</option>
+                        <option value="avanzado">Avanzado: 222 x 22</option>
+                        <option value="muyavanzado">Muy avanzado: 222 x 222</option>
+                    </select>
+
+                    <label
+                        class="mt-4 flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 font-semibold">
+                        <input id="checkContraReloj" type="checkbox" class="h-5 w-5" />
+                        Jugar contra reloj
+                    </label>
+                </div>
+
+                <div class="rounded-2xl bg-slate-50 p-5">
+                    <label
+                        class="mb-3 flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 font-semibold">
+                        <input id="checkTablasMultiplicar" type="checkbox" class="h-5 w-5" />
+                        Practicar tablas de multiplicar
+                    </label>
+
+                    <div id="seccionOperaciones">
+                        <p class="mb-2 font-black text-slate-800">Operaciones</p>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label id="itemOperacionSuma"
+                                class="rounded-xl border border-slate-200 bg-white p-3 font-semibold transition"><input
+                                    id="checkSuma" type="checkbox" checked class="mr-2" />Sumas</label>
+                            <label id="itemOperacionResta"
+                                class="rounded-xl border border-slate-200 bg-white p-3 font-semibold transition"><input
+                                    id="checkResta" type="checkbox" checked class="mr-2" />Restas</label>
+                            <label id="itemOperacionMultiplicacion"
+                                class="rounded-xl border border-slate-200 bg-white p-3 font-semibold transition"><input
+                                    id="checkMultiplicacion" type="checkbox" checked
+                                    class="mr-2" />Multiplicaciones</label>
+                            <label id="itemOperacionDivision"
+                                class="rounded-xl border border-slate-200 bg-white p-3 font-semibold transition"><input
+                                    id="checkDivision" type="checkbox" class="mr-2" />Divisiones</label>
+                        </div>
+                    </div>
+
+                    <div id="seccionTablas"
+                        class="mt-3 hidden rounded-xl border-2 border-cyan-300 bg-gradient-to-br from-cyan-100 via-fuchsia-100 to-amber-100 p-3 shadow-sm">
+                        <p class="mb-2 font-black text-fuchsia-800">Selecciona tablas</p>
+                        <div class="grid grid-cols-5 gap-2">
+                            <button
+                                class="boton-tabla rounded-lg border-2 border-cyan-300 bg-white/90 py-2 font-black text-cyan-800 shadow-sm transition hover:scale-[1.03] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-tabla="1">1</button>
+                            <button
+                                class="boton-tabla rounded-lg border-2 border-cyan-300 bg-white/90 py-2 font-black text-cyan-800 shadow-sm transition hover:scale-[1.03] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-tabla="2">2</button>
+                            <button
+                                class="boton-tabla rounded-lg border-2 border-cyan-300 bg-white/90 py-2 font-black text-cyan-800 shadow-sm transition hover:scale-[1.03] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-tabla="3">3</button>
+                            <button
+                                class="boton-tabla rounded-lg border-2 border-cyan-300 bg-white/90 py-2 font-black text-cyan-800 shadow-sm transition hover:scale-[1.03] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-tabla="4">4</button>
+                            <button
+                                class="boton-tabla rounded-lg border-2 border-cyan-300 bg-white/90 py-2 font-black text-cyan-800 shadow-sm transition hover:scale-[1.03] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-tabla="5">5</button>
+                            <button
+                                class="boton-tabla rounded-lg border-2 border-cyan-300 bg-white/90 py-2 font-black text-cyan-800 shadow-sm transition hover:scale-[1.03] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-tabla="6">6</button>
+                            <button
+                                class="boton-tabla rounded-lg border-2 border-cyan-300 bg-white/90 py-2 font-black text-cyan-800 shadow-sm transition hover:scale-[1.03] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-tabla="7">7</button>
+                            <button
+                                class="boton-tabla rounded-lg border-2 border-cyan-300 bg-white/90 py-2 font-black text-cyan-800 shadow-sm transition hover:scale-[1.03] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-tabla="8">8</button>
+                            <button
+                                class="boton-tabla rounded-lg border-2 border-cyan-300 bg-white/90 py-2 font-black text-cyan-800 shadow-sm transition hover:scale-[1.03] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-tabla="9">9</button>
+                            <button
+                                class="boton-tabla rounded-lg border-2 border-cyan-300 bg-white/90 py-2 font-black text-cyan-800 shadow-sm transition hover:scale-[1.03] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-tabla="10">10</button>
+                        </div>
+                        <p id="tablaSeleccionadaTexto" class="mt-2 text-sm font-bold text-fuchsia-700">Tablas
+                            seleccionadas: 1</p>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl bg-slate-50 p-5">
+                    <p class="mb-3 font-black text-slate-800">Listo para empezar</p>
+                    <p class="text-slate-600">Cuando termines de configurar, inicia la práctica.</p>
+                    <button id="btnIrPractica"
+                        class="mt-5 rounded-xl bg-gradient-to-r from-violet-500 to-pink-500 px-6 py-3 text-lg font-bold text-white shadow-md transition hover:scale-[1.02] hover:from-violet-600 hover:to-pink-600">
+                        Ir a la práctica
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="pantallaPractica"
+            class="hidden rounded-2xl border border-white/70 bg-white/85 p-7 shadow-lg backdrop-blur">
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-sm font-black uppercase tracking-wide text-emerald-700">Paso 3 de 3</p>
+                    <p id="textoJugadorPractica" class="font-semibold text-slate-600">Jugador: Sin seleccionar</p>
+                </div>
+                <div class="flex gap-2">
+                    <button id="btnVolverConfiguracion"
+                        class="rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-2 font-bold text-indigo-700 hover:bg-indigo-100">
+                        Configuración
+                    </button>
+                    <button id="btnNuevaOperacion"
+                        class="rounded-xl bg-gradient-to-r from-pink-500 to-orange-400 px-4 py-2 font-bold text-white shadow-sm hover:from-pink-600 hover:to-orange-500">Nueva
+                        operación</button>
+                </div>
+            </div>
+
+            <div class="mt-6 grid gap-5 lg:grid-cols-[1fr_1.3fr]">
+                <aside class="rounded-2xl bg-gradient-to-br from-emerald-50 to-cyan-50 p-5">
+                    <p class="text-lg font-black text-slate-800">Estado del juego</p>
+                    <div class="mt-2 flex items-center gap-3">
+                        <p id="mascota" class="text-6xl">🦊</p>
+                        <p id="nombreJugadorPractica" class="text-xl font-black text-fuchsia-700"></p>
+                    </div>
+
+                    <div id="contenedorTiempo" class="mt-4 hidden rounded-xl border border-slate-200 bg-white p-3">
+                        <div class="mb-2 flex items-center justify-between text-sm font-black text-slate-600">
+                            <span>Tiempo</span>
+                            <span id="textoTiempo">0s</span>
+                        </div>
+                        <div class="h-3 overflow-hidden rounded-full bg-slate-200">
+                            <div id="barraTiempo"
+                                class="h-full w-full rounded-full bg-emerald-500 transition-all duration-300"></div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 grid grid-cols-3 gap-2">
+                        <div class="rounded-xl border border-slate-200 bg-white p-3 text-center">
+                            <p class="text-xs font-bold uppercase text-slate-500">Puntaje</p>
+                            <p id="puntaje" class="text-2xl font-black text-slate-900">0 ⭐</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-white p-3 text-center">
+                            <p class="text-xs font-bold uppercase text-slate-500">Racha</p>
+                            <p id="racha" class="text-2xl font-black text-slate-900">0 🔥</p>
+                        </div>
+                        <div class="rounded-xl border border-fuchsia-200 bg-fuchsia-50 p-3 text-center">
+                            <p class="text-xs font-bold uppercase text-fuchsia-600">Partidas</p>
+                            <p id="partidasTexto" class="text-2xl font-black text-fuchsia-800">0 🎮</p>
+                        </div>
+                    </div>
+                </aside>
+
+                <div id="tarjetaOperacion" class="rounded-2xl bg-gradient-to-br from-rose-50 to-amber-50 p-5">
+                    <p class="mb-2 text-sm font-black uppercase tracking-wide text-slate-500">Resuelve la operación</p>
+
+                    <div class="mb-4 flex items-center gap-1">
+                        <span id="dot-0"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-1"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-2"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-3"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-4"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-5"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-6"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-7"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span class="ml-2 text-xs font-bold text-slate-500" id="textoProgreso">0 / 8</span>
+                    </div>
+                    <div id="operacion"
+                        class="operacion-con-confeti mb-5 rounded-2xl border border-slate-200 bg-white px-6 py-8 text-center text-5xl font-black text-slate-900 md:text-6xl">
+                        <span class="texto-operacion">5 + 3</span>
+                    </div>
+
+                    <label for="respuesta" class="mb-2 block font-bold text-slate-700">Tu respuesta</label>
+                    <input id="respuesta" type="number" min="0" step="1" inputmode="numeric"
+                        class="w-full rounded-xl border border-slate-300 bg-white p-4 text-center text-3xl font-black outline-none focus:border-slate-500"
+                        placeholder="?" />
+
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <button id="btnRevisar"
+                            class="rounded-xl bg-gradient-to-r from-emerald-500 to-lime-500 px-6 py-3 text-lg font-bold text-white shadow-sm transition hover:from-emerald-600 hover:to-lime-600">Revisar</button>
+                        <button id="btnAyudaTablas"
+                            class="hidden rounded-xl border border-cyan-300 bg-cyan-50 px-4 py-3 text-lg font-black text-cyan-800 shadow-sm transition hover:bg-cyan-100"
+                            aria-label="Ayuda de tablas">
+                            💡
+                            <span id="contadorAyudaTablas"
+                                class="ml-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-cyan-600 text-sm text-white">2</span>
+                        </button>
+                        <button id="btnMostrarRespuesta"
+                            class="rounded-xl border border-amber-200 bg-amber-50 px-5 py-3 text-lg font-bold text-amber-800 transition hover:bg-amber-100">Mostrar
+                            respuesta</button>
+                    </div>
+
+                    <div id="mensaje"
+                        class="mt-5 rounded-xl border border-slate-200 bg-white p-4 text-lg font-bold text-slate-700">
+                        ¡Vamos a practicar!
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="popupFinPartida" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 px-4"
+        role="dialog" aria-modal="true" aria-labelledby="tituloFinPartida">
+        <div class="w-full max-w-sm rounded-3xl bg-white p-8 text-center shadow-2xl">
+            <div class="mb-3 text-7xl">🏆</div>
+            <h2 id="tituloFinPartida" class="mb-1 text-3xl font-black text-fuchsia-700">¡Partida terminada!</h2>
+            <p id="subtituloFinPartida" class="mb-2 text-lg font-bold text-slate-600"></p>
+            <p id="contadorPartidasPopup" class="mb-6 text-base font-semibold text-slate-500"></p>
+            <button id="btnSiguientePartida"
+                class="rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-8 py-3 text-xl font-bold text-white shadow-md transition hover:scale-[1.02] hover:from-fuchsia-600 hover:to-cyan-600">
+                ¡Siguiente partida!
+            </button>
+        </div>
+    </div>
+
+    <div id="popupAyudaTablas" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/65 px-4"
+        role="dialog" aria-modal="true" aria-labelledby="tituloAyudaTablas">
+        <div class="w-full max-w-5xl rounded-3xl bg-white p-6 shadow-2xl md:p-8">
+            <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <h2 id="tituloAyudaTablas" class="text-2xl font-black text-cyan-700">Rueda de Tablas</h2>
+                    <p id="subtituloAyudaTablas" class="text-sm font-semibold text-slate-600"></p>
+                </div>
+                <button id="btnCerrarAyudaTablas"
+                    class="rounded-xl border border-slate-300 bg-slate-100 px-4 py-2 font-bold text-slate-700 hover:bg-slate-200">Cerrar</button>
+            </div>
+            <div id="contenedorRuedasTablas" class="grid gap-6 md:grid-cols-2"></div>
+        </div>
+    </div>
+
+    <script>
+        const pantallaUsuarios = document.getElementById('pantallaUsuarios');
+        const pantallaConfiguracion = document.getElementById('pantallaConfiguracion');
+        const pantallaPractica = document.getElementById('pantallaPractica');
+
+        const btnVolverUsuarios = document.getElementById('btnVolverUsuarios');
+        const btnIrPractica = document.getElementById('btnIrPractica');
+        const btnVolverConfiguracion = document.getElementById('btnVolverConfiguracion');
+
+        const nuevoNickname = document.getElementById('nuevoNickname');
+        const btnCrearJugador = document.getElementById('btnCrearJugador');
+        const listaJugadores = document.getElementById('listaJugadores');
+        const textoJugadorConfiguracion = document.getElementById('textoJugadorConfiguracion');
+        const textoJugadorPractica = document.getElementById('textoJugadorPractica');
+        const nombreJugadorPractica = document.getElementById('nombreJugadorPractica');
+
+        const checkTablasMultiplicar = document.getElementById('checkTablasMultiplicar');
+        const seccionOperaciones = document.getElementById('seccionOperaciones');
+        const seccionTablas = document.getElementById('seccionTablas');
+        const botonesTabla = document.querySelectorAll('.boton-tabla');
+        const tablaSeleccionadaTexto = document.getElementById('tablaSeleccionadaTexto');
+        const checkSuma = document.getElementById('checkSuma');
+        const checkResta = document.getElementById('checkResta');
+        const checkMultiplicacion = document.getElementById('checkMultiplicacion');
+        const checkDivision = document.getElementById('checkDivision');
+        const itemOperacionSuma = document.getElementById('itemOperacionSuma');
+        const itemOperacionResta = document.getElementById('itemOperacionResta');
+        const itemOperacionMultiplicacion = document.getElementById('itemOperacionMultiplicacion');
+        const itemOperacionDivision = document.getElementById('itemOperacionDivision');
+        const checkContraReloj = document.getElementById('checkContraReloj');
+        const cantidadDigitos = document.getElementById('cantidadDigitos');
+
+        const selectorPersonajes = document.getElementById('selectorPersonajes');
+        const botonesPersonaje = document.querySelectorAll('.boton-personaje');
+        const vistaPersonaje = document.getElementById('vistaPersonaje');
+        const mascota = document.getElementById('mascota');
+
+        const contenedorTiempo = document.getElementById('contenedorTiempo');
+        const textoTiempo = document.getElementById('textoTiempo');
+        const barraTiempo = document.getElementById('barraTiempo');
+        const operacion = document.getElementById('operacion');
+        const respuesta = document.getElementById('respuesta');
+        const mensaje = document.getElementById('mensaje');
+        const puntajeTexto = document.getElementById('puntaje');
+        const rachaTexto = document.getElementById('racha');
+        const partidasTexto = document.getElementById('partidasTexto');
+        const textoProgreso = document.getElementById('textoProgreso');
+        const progresoDots = [0, 1, 2, 3, 4, 5, 6, 7].map(function (i) { return document.getElementById('dot-' + i); });
+        const popupFinPartida = document.getElementById('popupFinPartida');
+        const subtituloFinPartida = document.getElementById('subtituloFinPartida');
+        const contadorPartidasPopup = document.getElementById('contadorPartidasPopup');
+        const btnSiguientePartida = document.getElementById('btnSiguientePartida');
+        const tarjetaOperacion = document.getElementById('tarjetaOperacion');
+        const btnNuevaOperacion = document.getElementById('btnNuevaOperacion');
+        const btnRevisar = document.getElementById('btnRevisar');
+        const btnAyudaTablas = document.getElementById('btnAyudaTablas');
+        const contadorAyudaTablas = document.getElementById('contadorAyudaTablas');
+        const btnMostrarRespuesta = document.getElementById('btnMostrarRespuesta');
+        const popupAyudaTablas = document.getElementById('popupAyudaTablas');
+        const subtituloAyudaTablas = document.getElementById('subtituloAyudaTablas');
+        const contenedorRuedasTablas = document.getElementById('contenedorRuedasTablas');
+        const btnCerrarAyudaTablas = document.getElementById('btnCerrarAyudaTablas');
+
+        let respuestaCorrecta = 0;
+        let puntaje = 0;
+        let rachaActual = 0;
+        let operacionesEnPartidaActual = 0;
+        let partidasEnSesion = 0;
+        const OPERACIONES_POR_PARTIDA = 8;
+        const AYUDAS_POR_PARTIDA = 2;
+        let personajeSeleccionado = '🦊';
+        let usoAyuda = false;
+        let tipoOperacionActual = 'suma';
+        let numeroOperacion1 = 0;
+        let numeroOperacion2 = 0;
+        let ayudasDisponibles = AYUDAS_POR_PARTIDA;
+        let operacionesConAyuda = [];
+        let segundosBaseConfigurables = 15;
+        let incrementoSegundosPorNivel = 15;
+        let tiempoTotal = 0;
+        let tiempoRestante = 0;
+        let intervaloTiempo = null;
+        let timeoutConfetiOperacion = null;
+        let timeoutErrorOperacion = null;
+        let tablasSeleccionadas = [1];
+        let jugadores = [];
+        let jugadorActualId = null;
+
+        const claveAlmacenamientoJugadores = 'mateAventurasJugadores';
+        const claveJugadorActual = 'mateAventurasJugadorActual';
+        const claveGrupoJugadores = 'mateAventurasGrupoJugadores';
+
+        function mostrarPantalla(nombre) {
+            pantallaUsuarios.classList.add('hidden');
+            pantallaConfiguracion.classList.add('hidden');
+            pantallaPractica.classList.add('hidden');
+
+            if (nombre === 'usuarios') pantallaUsuarios.classList.remove('hidden');
+            if (nombre === 'configuracion') pantallaConfiguracion.classList.remove('hidden');
+            if (nombre === 'practica') pantallaPractica.classList.remove('hidden');
+        }
+
+        function abrirPracticaDesdeMenu() {
+            renderizarListaJugadores();
+            mostrarPantalla('usuarios');
+        }
+
+        function cargarJugadoresDesdeAlmacenamiento() {
+            try {
+                const datosGuardados = localStorage.getItem(claveAlmacenamientoJugadores);
+                jugadores = datosGuardados ? JSON.parse(datosGuardados) : [];
+            } catch (e) {
+                jugadores = [];
+                localStorage.removeItem(claveAlmacenamientoJugadores);
+            }
+
+            jugadorActualId = localStorage.getItem(claveJugadorActual);
+        }
+
+        function guardarJugadoresEnAlmacenamiento() {
+            localStorage.setItem(claveAlmacenamientoJugadores, JSON.stringify(jugadores));
+
+            if (jugadorActualId !== null) {
+                localStorage.setItem(claveJugadorActual, jugadorActualId);
+            } else {
+                localStorage.removeItem(claveJugadorActual);
+            }
+        }
+
+        function obtenerGrupoJugadoresId() {
+            let grupoId = localStorage.getItem(claveGrupoJugadores);
+
+            if (!grupoId) {
+                grupoId = crypto.randomUUID();
+                localStorage.setItem(claveGrupoJugadores, grupoId);
+            }
+
+            return grupoId;
+        }
+
+        function obtenerJugadorActual() {
+            return jugadores.find(function (jugador) {
+                return jugador.id === jugadorActualId;
+            });
+        }
+
+        function obtenerNombreJugador() {
+            const jugador = obtenerJugadorActual();
+            return jugador ? jugador.nickname : 'campeón';
+        }
+
+        function actualizarCabecerasJugador() {
+            const jugador = obtenerJugadorActual();
+
+            if (!jugador) {
+                textoJugadorConfiguracion.textContent = 'Jugador: Sin seleccionar';
+                textoJugadorPractica.textContent = 'Jugador: Sin seleccionar';
+                nombreJugadorPractica.textContent = '';
+                vistaPersonaje.textContent = personajeSeleccionado;
+                mascota.textContent = personajeSeleccionado;
+                return;
+            }
+
+            textoJugadorConfiguracion.textContent = 'Jugador: ' + jugador.nickname;
+            textoJugadorPractica.textContent = 'Jugador: ' + jugador.nickname;
+            nombreJugadorPractica.textContent = jugador.nickname;
+            vistaPersonaje.textContent = personajeSeleccionado;
+            mascota.textContent = personajeSeleccionado;
+        }
+
+        function actualizarResaltadoPersonajes() {
+            botonesPersonaje.forEach(function (boton) {
+                const seleccionado = boton.dataset.personaje === personajeSeleccionado;
+                boton.classList.toggle('personaje-seleccionado-arcoiris', seleccionado);
+                boton.setAttribute('aria-pressed', seleccionado ? 'true' : 'false');
+            });
+        }
+
+        function actualizarResaltadoOperaciones() {
+            itemOperacionSuma.classList.toggle('operacion-item-seleccionado', checkSuma.checked);
+            itemOperacionResta.classList.toggle('operacion-item-seleccionado', checkResta.checked);
+            itemOperacionMultiplicacion.classList.toggle('operacion-item-seleccionado', checkMultiplicacion.checked);
+            itemOperacionDivision.classList.toggle('operacion-item-seleccionado', checkDivision.checked);
+        }
+
+        function obtenerConfiguracionActual() {
+            return {
+                practicarTablas: checkTablasMultiplicar.checked,
+                tablasSeleccionadas: tablasSeleccionadas,
+                suma: checkSuma.checked,
+                resta: checkResta.checked,
+                multiplicacion: checkMultiplicacion.checked,
+                division: checkDivision.checked,
+                contraReloj: checkContraReloj.checked,
+                nivel: cantidadDigitos.value
+            };
+        }
+
+        function obtenerConfiguracionPredeterminada() {
+            return {
+                practicarTablas: false,
+                tablasSeleccionadas: [1],
+                suma: true,
+                resta: true,
+                multiplicacion: true,
+                division: false,
+                contraReloj: false,
+                nivel: 'muyfacil'
+            };
+        }
+
+        function guardarEstadoJugadorActual() {
+            const jugador = obtenerJugadorActual();
+
+            if (!jugador) {
+                return;
+            }
+
+            jugador.personaje = personajeSeleccionado;
+            jugador.puntaje = puntaje;
+            jugador.totalPartidas = jugador.totalPartidas || 0;
+            jugador.configuracion = obtenerConfiguracionActual();
+            guardarJugadoresEnAlmacenamiento();
+        }
+
+        function actualizarPuntaje() {
+            puntajeTexto.textContent = puntaje + ' ⭐';
+        }
+
+        function actualizarRacha() {
+            rachaTexto.textContent = rachaActual + ' 🔥';
+        }
+
+        function actualizarPartidas() {
+            partidasTexto.textContent = partidasEnSesion + ' 🎮';
+        }
+
+        function actualizarProgreso() {
+            progresoDots.forEach(function (dot, i) {
+                dot.classList.remove('bg-white', 'border-fuchsia-300', 'bg-fuchsia-500', 'border-fuchsia-500', 'bg-amber-300', 'border-amber-500');
+
+                if (i < operacionesEnPartidaActual) {
+                    if (operacionesConAyuda.includes(i)) {
+                        dot.classList.add('bg-amber-300', 'border-amber-500');
+                    } else {
+                        dot.classList.add('bg-fuchsia-500', 'border-fuchsia-500');
+                    }
+                } else {
+                    dot.classList.add('bg-white', 'border-fuchsia-300');
+                }
+            });
+            textoProgreso.textContent = operacionesEnPartidaActual + ' / ' + OPERACIONES_POR_PARTIDA;
+        }
+
+        function esOperacionConAyudaTablas() {
+            return tipoOperacionActual === 'multiplicacion' || tipoOperacionActual === 'division';
+        }
+
+        function reiniciarAyudasPartida() {
+            ayudasDisponibles = AYUDAS_POR_PARTIDA;
+            operacionesConAyuda = [];
+            usoAyuda = false;
+            actualizarProgreso();
+            actualizarBotonAyudaTablas();
+        }
+
+        function actualizarBotonAyudaTablas() {
+            contadorAyudaTablas.textContent = String(ayudasDisponibles);
+
+            if (!esOperacionConAyudaTablas()) {
+                btnAyudaTablas.classList.add('hidden');
+                return;
+            }
+
+            btnAyudaTablas.classList.remove('hidden');
+
+            if (ayudasDisponibles <= 0) {
+                btnAyudaTablas.disabled = true;
+                btnAyudaTablas.classList.add('cursor-not-allowed', 'opacity-45');
+            } else {
+                btnAyudaTablas.disabled = false;
+                btnAyudaTablas.classList.remove('cursor-not-allowed', 'opacity-45');
+            }
+        }
+
+        function obtenerDigitosUnicos(numero) {
+            const digitos = String(Math.abs(numero)).split('').map(function (digito) {
+                return Number(digito);
+            });
+
+            const unicos = [];
+            digitos.forEach(function (digito) {
+                if (digito !== 0 && !unicos.includes(digito)) {
+                    unicos.push(digito);
+                }
+            });
+
+            if (unicos.length === 0) {
+                unicos.push(0);
+            }
+
+            return unicos;
+        }
+
+        function obtenerTablasParaAyuda() {
+            if (!esOperacionConAyudaTablas()) {
+                return [];
+            }
+
+            if (tipoOperacionActual === 'multiplicacion') {
+                const base = Math.min(numeroOperacion1, numeroOperacion2);
+                if (base >= 10) {
+                    return obtenerDigitosUnicos(base);
+                }
+                return [base];
+            }
+
+            if (numeroOperacion1 >= 10) {
+                return obtenerDigitosUnicos(numeroOperacion1);
+            }
+            return [numeroOperacion1];
+        }
+
+        function crearNodoRueda(texto, clase, radio, indice, total) {
+            const nodo = document.createElement('div');
+            nodo.className = 'nodo-rueda ' + clase;
+            nodo.textContent = texto;
+
+            if (typeof radio === 'number') {
+                const angulo = ((indice / total) * Math.PI * 2) - (Math.PI / 2);
+                const x = Math.cos(angulo) * radio;
+                const y = Math.sin(angulo) * radio;
+                nodo.style.transform = 'translate(-50%, -50%) translate(' + x + 'px, ' + y + 'px)';
+            }
+
+            return nodo;
+        }
+
+        function crearRuedaTabla(tabla) {
+            const contenedor = document.createElement('div');
+            contenedor.className = 'rounded-3xl border border-cyan-100 bg-gradient-to-br from-cyan-50 to-sky-100 p-4';
+
+            const titulo = document.createElement('p');
+            titulo.className = 'mb-3 text-center text-xl font-black text-cyan-700';
+            titulo.textContent = 'Tabla del ' + tabla;
+
+            const rueda = document.createElement('div');
+            rueda.className = 'rueda-tabla';
+
+            rueda.appendChild(crearNodoRueda(tabla + '×', 'nodo-centro'));
+
+            for (let i = 1; i <= 10; i += 1) {
+                rueda.appendChild(crearNodoRueda(String(i), 'nodo-interior', 76, i - 1, 10));
+                rueda.appendChild(crearNodoRueda(String(tabla * i), 'nodo-exterior', 128, i - 1, 10));
+            }
+
+            contenedor.appendChild(titulo);
+            contenedor.appendChild(rueda);
+            return contenedor;
+        }
+
+        function abrirPopupAyudaTablas() {
+            if (!esOperacionConAyudaTablas() || ayudasDisponibles <= 0) {
+                return;
+            }
+
+            ayudasDisponibles -= 1;
+            usoAyuda = true;
+            actualizarBotonAyudaTablas();
+
+            const tablas = obtenerTablasParaAyuda();
+            contenedorRuedasTablas.innerHTML = '';
+
+            tablas.forEach(function (tabla) {
+                contenedorRuedasTablas.appendChild(crearRuedaTabla(tabla));
+            });
+
+            if (tablas.length === 1) {
+                subtituloAyudaTablas.textContent = 'Te mostramos la tabla clave para resolver esta operación.';
+            } else {
+                subtituloAyudaTablas.textContent = 'La operación usa varios dígitos. Aquí tienes las tablas que te ayudan.';
+            }
+
+            popupAyudaTablas.classList.remove('hidden');
+            popupAyudaTablas.classList.add('flex');
+        }
+
+        function cerrarPopupAyudaTablas() {
+            popupAyudaTablas.classList.add('hidden');
+            popupAyudaTablas.classList.remove('flex');
+            respuesta.focus();
+        }
+
+        function terminarPartida() {
+            detenerTiempo();
+            partidasEnSesion += 1;
+            actualizarPartidas();
+
+            const jugador = obtenerJugadorActual();
+            if (jugador) {
+                jugador.totalPartidas = (jugador.totalPartidas || 0) + 1;
+                guardarJugadoresEnAlmacenamiento();
+            }
+
+            operacionesEnPartidaActual = 0;
+            actualizarProgreso();
+
+            subtituloFinPartida.textContent = '¡Muy bien, ' + obtenerNombreJugador() + '!';
+            contadorPartidasPopup.textContent = 'Partidas completadas hoy: ' + partidasEnSesion;
+            popupFinPartida.classList.remove('hidden');
+            popupFinPartida.classList.add('flex');
+            mascota.textContent = '🥳';
+            tocarSonidoPartidaTerminada();
+            cerrarPopupAyudaTablas();
+        }
+
+        function aplicarConfiguracionJugador(jugador) {
+            const configuracion = Object.assign(
+                obtenerConfiguracionPredeterminada(),
+                jugador.configuracion || {}
+            );
+
+            checkTablasMultiplicar.checked = Boolean(configuracion.practicarTablas);
+            tablasSeleccionadas = Array.isArray(configuracion.tablasSeleccionadas) && configuracion.tablasSeleccionadas.length > 0
+                ? configuracion.tablasSeleccionadas.slice().sort(function (a, b) { return a - b; })
+                : [1];
+            checkSuma.checked = Boolean(configuracion.suma);
+            checkResta.checked = Boolean(configuracion.resta);
+            checkMultiplicacion.checked = Boolean(configuracion.multiplicacion);
+            checkDivision.checked = Boolean(configuracion.division);
+            checkContraReloj.checked = Boolean(configuracion.contraReloj);
+            cantidadDigitos.value = configuracion.nivel || 'muyfacil';
+            actualizarVistaModoTablas();
+        }
+
+        function seleccionarJugador(id) {
+            const jugador = jugadores.find(function (item) {
+                return item.id === id;
+            });
+
+            if (!jugador) {
+                return;
+            }
+
+            jugadorActualId = jugador.id;
+            personajeSeleccionado = jugador.personaje || '🦊';
+            puntaje = jugador.puntaje || 0;
+            rachaActual = 0;
+            operacionesEnPartidaActual = 0;
+            partidasEnSesion = 0;
+
+            aplicarConfiguracionJugador(jugador);
+            actualizarPuntaje();
+            actualizarRacha();
+            actualizarPartidas();
+            actualizarProgreso();
+            actualizarCabecerasJugador();
+            actualizarResaltadoPersonajes();
+            guardarEstadoJugadorActual();
+            mostrarPantalla('configuracion');
+        }
+
+        function crearJugador() {
+            const nombre = nuevoNickname.value.trim();
+
+            if (nombre === '') {
+                return;
+            }
+
+            const nuevoJugador = {
+                id: crypto.randomUUID(),
+                grupoJugadoresId: obtenerGrupoJugadoresId(),
+                nickname: nombre,
+                personaje: personajeSeleccionado,
+                puntaje: 0,
+                totalPartidas: 0,
+                configuracion: obtenerConfiguracionActual()
+            };
+
+            jugadores.push(nuevoJugador);
+            guardarJugadoresEnAlmacenamiento();
+            nuevoNickname.value = '';
+            renderizarListaJugadores();
+            seleccionarJugador(nuevoJugador.id);
+        }
+
+        function renderizarListaJugadores() {
+            listaJugadores.innerHTML = '';
+
+            if (jugadores.length === 0) {
+                const vacio = document.createElement('div');
+                vacio.className = 'rounded-xl border border-slate-200 bg-slate-50 p-4 text-center font-semibold text-slate-500';
+                vacio.textContent = 'No hay usuarios guardados.';
+                listaJugadores.appendChild(vacio);
+                return;
+            }
+
+            jugadores.forEach(function (jugador) {
+                const item = document.createElement('div');
+                item.className = 'flex items-center gap-2 rounded-xl border border-slate-200 bg-white p-3';
+
+                const botonSeleccionar = document.createElement('button');
+                botonSeleccionar.className = 'flex flex-1 items-center gap-3 rounded-lg p-2 text-left hover:bg-slate-50';
+
+                const emoji = document.createElement('span');
+                emoji.className = 'text-3xl';
+                emoji.textContent = jugador.personaje;
+
+                const texto = document.createElement('span');
+                texto.className = 'flex-1';
+
+                const nombre = document.createElement('span');
+                nombre.className = 'block text-lg font-black text-slate-800';
+                nombre.textContent = jugador.nickname;
+
+                const puntos = document.createElement('span');
+                puntos.className = 'block text-sm font-semibold text-slate-500';
+                puntos.textContent = jugador.puntaje + ' estrellas';
+
+                texto.appendChild(nombre);
+                texto.appendChild(puntos);
+                botonSeleccionar.appendChild(emoji);
+                botonSeleccionar.appendChild(texto);
+                botonSeleccionar.addEventListener('click', function () {
+                    seleccionarJugador(jugador.id);
+                });
+
+                const botonReset = document.createElement('button');
+                botonReset.className = 'rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-bold text-slate-600 hover:bg-slate-100';
+                botonReset.textContent = 'Reset';
+                botonReset.addEventListener('click', function () {
+                    jugador.puntaje = 0;
+                    if (jugadorActualId === jugador.id) {
+                        puntaje = 0;
+                        rachaActual = 0;
+                        actualizarPuntaje();
+                        actualizarRacha();
+                    }
+                    guardarJugadoresEnAlmacenamiento();
+                    renderizarListaJugadores();
+                });
+
+                const botonEliminar = document.createElement('button');
+                botonEliminar.className = 'rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-100';
+                botonEliminar.textContent = 'Eliminar';
+                botonEliminar.addEventListener('click', function () {
+                    jugadores = jugadores.filter(function (j) {
+                        return j.id !== jugador.id;
+                    });
+
+                    if (jugadorActualId === jugador.id) {
+                        jugadorActualId = null;
+                        puntaje = 0;
+                        rachaActual = 0;
+                        actualizarPuntaje();
+                        actualizarRacha();
+                        actualizarCabecerasJugador();
+                    }
+
+                    guardarJugadoresEnAlmacenamiento();
+                    renderizarListaJugadores();
+                });
+
+                item.appendChild(botonSeleccionar);
+                item.appendChild(botonReset);
+                item.appendChild(botonEliminar);
+                listaJugadores.appendChild(item);
+            });
+        }
+
+        function obtenerNumeroAleatorio(minimo, maximo) {
+            return Math.floor(Math.random() * (maximo - minimo + 1)) + minimo;
+        }
+
+        function obtenerRangoPorDigitos(cantidad) {
+            const minimo = Math.pow(10, cantidad - 1);
+            const maximo = Math.pow(10, cantidad) - 1;
+            return { minimo, maximo };
+        }
+
+        function obtenerConfiguracionDificultad() {
+            const nivel = cantidadDigitos.value;
+
+            if (nivel === 'muyfacil') return { a: 1, b: 1, segundosBase: segundosBaseConfigurables };
+            if (nivel === 'facil') return { a: 2, b: 1, segundosBase: segundosBaseConfigurables + (incrementoSegundosPorNivel * 1) };
+            if (nivel === 'intermedio') return { a: 3, b: 1, segundosBase: segundosBaseConfigurables + (incrementoSegundosPorNivel * 2) };
+            if (nivel === 'avanzado') return { a: 3, b: 2, segundosBase: segundosBaseConfigurables + (incrementoSegundosPorNivel * 3) };
+            return { a: 3, b: 3, segundosBase: segundosBaseConfigurables + (incrementoSegundosPorNivel * 4) };
+        }
+
+        function detenerTiempo() {
+            if (intervaloTiempo !== null) {
+                clearInterval(intervaloTiempo);
+                intervaloTiempo = null;
+            }
+        }
+
+        function obtenerTiempoTotal(configuracion, tipoOperacion) {
+            const multiplicador = tipoOperacion === 'multiplicacion' || tipoOperacion === 'division' ? 1.5 : 1;
+            return Math.round(configuracion.segundosBase * multiplicador);
+        }
+
+        function actualizarBarraTiempo() {
+            const porcentaje = Math.max(0, (tiempoRestante / tiempoTotal) * 100);
+            barraTiempo.style.width = porcentaje + '%';
+            textoTiempo.textContent = Math.ceil(tiempoRestante) + 's';
+
+            barraTiempo.classList.remove('bg-emerald-500', 'bg-yellow-400', 'bg-orange-500', 'bg-red-600');
+
+            if (porcentaje <= 10) {
+                barraTiempo.classList.add('bg-red-600');
+            } else if (porcentaje <= 40) {
+                barraTiempo.classList.add('bg-orange-500');
+            } else if (porcentaje <= 70) {
+                barraTiempo.classList.add('bg-yellow-400');
+            } else {
+                barraTiempo.classList.add('bg-emerald-500');
+            }
+        }
+
+        function iniciarTiempo(configuracion, tipoOperacion) {
+            detenerTiempo();
+
+            if (!checkContraReloj.checked) {
+                contenedorTiempo.classList.add('hidden');
+                return;
+            }
+
+            tiempoTotal = obtenerTiempoTotal(configuracion, tipoOperacion);
+            tiempoRestante = tiempoTotal;
+            contenedorTiempo.classList.remove('hidden');
+            actualizarBarraTiempo();
+
+            intervaloTiempo = setInterval(function () {
+                tiempoRestante -= 0.25;
+                actualizarBarraTiempo();
+
+                if (tiempoRestante <= 0) {
+                    tiempoRestante = 0;
+                    actualizarBarraTiempo();
+                    detenerTiempo();
+                    rachaActual = 0;
+                    actualizarRacha();
+                    mensaje.textContent = 'Se acabó el tiempo. Vamos con una nueva operación.';
+                    mensaje.className = 'mt-5 rounded-xl border border-red-200 bg-red-50 p-4 text-lg font-bold text-red-700';
+                    setTimeout(generarOperacion, 900);
+                }
+            }, 250);
+        }
+
+        function actualizarVistaModoTablas() {
+            tablaSeleccionadaTexto.textContent = 'Tablas seleccionadas: ' + tablasSeleccionadas.join(', ');
+
+            botonesTabla.forEach(function (boton) {
+                const esSeleccionada = tablasSeleccionadas.includes(Number(boton.dataset.tabla));
+                boton.classList.toggle('bg-gradient-to-r', esSeleccionada);
+                boton.classList.toggle('from-fuchsia-500', esSeleccionada);
+                boton.classList.toggle('to-cyan-500', esSeleccionada);
+                boton.classList.toggle('text-white', esSeleccionada);
+                boton.classList.toggle('border-fuchsia-500', esSeleccionada);
+                boton.classList.toggle('shadow-md', esSeleccionada);
+
+                boton.classList.toggle('bg-white/90', !esSeleccionada);
+                boton.classList.toggle('text-cyan-800', !esSeleccionada);
+                boton.classList.toggle('border-cyan-300', !esSeleccionada);
+            });
+
+            if (checkTablasMultiplicar.checked) {
+                seccionOperaciones.classList.add('hidden');
+                seccionTablas.classList.remove('hidden');
+            } else {
+                seccionOperaciones.classList.remove('hidden');
+                seccionTablas.classList.add('hidden');
+            }
+        }
+
+        function obtenerOperacionesSeleccionadas() {
+            const operaciones = [];
+
+            if (checkSuma.checked) operaciones.push('suma');
+            if (checkResta.checked) operaciones.push('resta');
+            if (checkMultiplicacion.checked) operaciones.push('multiplicacion');
+            if (checkDivision.checked) operaciones.push('division');
+
+            return operaciones;
+        }
+
+        function escogerOperacionAleatoria(operaciones) {
+            const posicion = obtenerNumeroAleatorio(0, operaciones.length - 1);
+            return operaciones[posicion];
+        }
+
+        function generarOperacionTablaMultiplicar() {
+            const configuracion = obtenerConfiguracionDificultad();
+            const multiplicador = obtenerNumeroAleatorio(1, 10);
+            const posicionTabla = obtenerNumeroAleatorio(0, tablasSeleccionadas.length - 1);
+            const tablaParaPracticar = tablasSeleccionadas[posicionTabla];
+
+            tipoOperacionActual = 'multiplicacion';
+            respuestaCorrecta = tablaParaPracticar * multiplicador;
+            numeroOperacion1 = tablaParaPracticar;
+            numeroOperacion2 = multiplicador;
+            establecerTextoOperacion(tablaParaPracticar + ' × ' + multiplicador);
+            respuesta.value = '';
+            respuesta.focus();
+            usoAyuda = false;
+            mensaje.textContent = 'Escribe la respuesta y presiona Revisar.';
+            mensaje.className = 'mt-5 rounded-xl border border-slate-200 bg-white p-4 text-lg font-bold text-slate-700';
+            mascota.textContent = personajeSeleccionado;
+            tarjetaOperacion.classList.remove('brillar');
+            operacion.classList.remove('operacion-incorrecta');
+            actualizarBotonAyudaTablas();
+            iniciarTiempo(configuracion, tipoOperacionActual);
+        }
+
+        function generarOperacion() {
+            if (!obtenerJugadorActual()) {
+                mensaje.textContent = 'Primero selecciona un usuario.';
+                return;
+            }
+
+            if (checkTablasMultiplicar.checked) {
+                generarOperacionTablaMultiplicar();
+                return;
+            }
+
+            const operaciones = obtenerOperacionesSeleccionadas();
+
+            if (operaciones.length === 0) {
+                mensaje.textContent = 'Escoge al menos una operación para practicar.';
+                mensaje.className = 'mt-5 rounded-xl border border-orange-200 bg-orange-50 p-4 text-lg font-bold text-orange-700';
+                return;
+            }
+
+            const configuracion = obtenerConfiguracionDificultad();
+            const rango1 = obtenerRangoPorDigitos(configuracion.a);
+            const rango2 = obtenerRangoPorDigitos(configuracion.b);
+            const tipoOperacion = escogerOperacionAleatoria(operaciones);
+            tipoOperacionActual = tipoOperacion;
+
+            let numero1 = obtenerNumeroAleatorio(rango1.minimo, rango1.maximo);
+            let numero2 = obtenerNumeroAleatorio(rango2.minimo, rango2.maximo);
+            let simbolo = '+';
+
+            if (tipoOperacion === 'suma') {
+                respuestaCorrecta = numero1 + numero2;
+                simbolo = '+';
+            }
+
+            if (tipoOperacion === 'resta') {
+                if (numero2 > numero1) {
+                    const temporal = numero1;
+                    numero1 = numero2;
+                    numero2 = temporal;
+                }
+                respuestaCorrecta = numero1 - numero2;
+                simbolo = '-';
+            }
+
+            if (tipoOperacion === 'multiplicacion') {
+                respuestaCorrecta = numero1 * numero2;
+                simbolo = '×';
+            }
+
+            if (tipoOperacion === 'division') {
+                respuestaCorrecta = numero2;
+                numero1 = numero1 * numero2;
+                simbolo = '÷';
+            }
+
+            establecerTextoOperacion(numero1 + ' ' + simbolo + ' ' + numero2);
+            numeroOperacion1 = numero1;
+            numeroOperacion2 = numero2;
+            respuesta.value = '';
+            respuesta.focus();
+            usoAyuda = false;
+            mensaje.textContent = 'Escribe la respuesta y presiona Revisar.';
+            mensaje.className = 'mt-5 rounded-xl border border-slate-200 bg-white p-4 text-lg font-bold text-slate-700';
+            mascota.textContent = personajeSeleccionado;
+            tarjetaOperacion.classList.remove('brillar');
+            operacion.classList.remove('operacion-incorrecta');
+            actualizarBotonAyudaTablas();
+            iniciarTiempo(configuracion, tipoOperacionActual);
+        }
+
+        function revisarRespuesta() {
+            const respuestaUsuario = Number(respuesta.value);
+
+            if (respuesta.value.trim() === '') {
+                mensaje.textContent = 'Primero escribe una respuesta.';
+                mensaje.className = 'mt-5 rounded-xl border border-orange-200 bg-orange-50 p-4 text-lg font-bold text-orange-700';
+                return;
+            }
+
+            if (respuestaUsuario === respuestaCorrecta) {
+                detenerTiempo();
+                const indiceOperacionResuelta = operacionesEnPartidaActual;
+                operacionesEnPartidaActual += 1;
+
+                if (!usoAyuda) {
+                    puntaje += 1;
+                    rachaActual += 1;
+                } else {
+                    rachaActual = 0;
+                    if (!operacionesConAyuda.includes(indiceOperacionResuelta)) {
+                        operacionesConAyuda.push(indiceOperacionResuelta);
+                    }
+                }
+
+                actualizarPuntaje();
+                actualizarRacha();
+                actualizarProgreso();
+                guardarEstadoJugadorActual();
+                renderizarListaJugadores();
+
+                const mensajeRacha = rachaActual >= 3 ? ' Racha de ' + rachaActual + ' 🔥' : '';
+                mensaje.textContent = usoAyuda
+                    ? 'Correcto, ' + obtenerNombreJugador() + '. Usaste ayuda, no suma puntos.'
+                    : 'Correcto, ' + obtenerNombreJugador() + '. Ganaste una estrella.' + mensajeRacha;
+                mensaje.className = 'mt-5 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-lg font-bold text-emerald-700';
+                mascota.textContent = '🥳';
+                mascota.classList.add('saltar');
+                tarjetaOperacion.classList.add('brillar');
+                activarEfectoConfetiOperacion();
+                tocarSonidoAcierto();
+                setTimeout(function () { mascota.classList.remove('saltar'); }, 500);
+
+                if (operacionesEnPartidaActual >= OPERACIONES_POR_PARTIDA) {
+                    setTimeout(terminarPartida, 900);
+                } else {
+                    setTimeout(generarOperacion, 900);
+                }
+            } else {
+                rachaActual = 0;
+                actualizarRacha();
+                activarEfectoErrorOperacion();
+                tocarSonidoError();
+                mensaje.textContent = 'Casi. Inténtalo otra vez.';
+                mensaje.className = 'mt-5 rounded-xl border border-red-200 bg-red-50 p-4 text-lg font-bold text-red-700';
+                mascota.textContent = '🤔';
+                respuesta.value = '';
+                respuesta.focus();
+            }
+        }
+
+        function obtenerContextoAudio() {
+            if (!window._audioCtx || window._audioCtx.state === 'closed') {
+                window._audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return window._audioCtx;
+        }
+
+        function tocarSonidoPartidaTerminada() {
+            try {
+                const ctx = obtenerContextoAudio();
+                const t = ctx.currentTime;
+                const secuencia = [
+                    { freq: 523.25, inicio: 0.00 },
+                    { freq: 659.25, inicio: 0.12 },
+                    { freq: 783.99, inicio: 0.24 },
+                    { freq: 659.25, inicio: 0.36 },
+                    { freq: 1046.5, inicio: 0.48 },
+                    { freq: 1046.5, inicio: 0.62 },
+                    { freq: 1174.7, inicio: 0.76 }
+                ];
+                secuencia.forEach(function (nota) {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = nota.freq;
+                    gain.gain.setValueAtTime(0, t + nota.inicio);
+                    gain.gain.linearRampToValueAtTime(0.28, t + nota.inicio + 0.04);
+                    gain.gain.exponentialRampToValueAtTime(0.001, t + nota.inicio + 0.30);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(t + nota.inicio);
+                    osc.stop(t + nota.inicio + 0.31);
+                });
+            } catch (e) { /* audio no disponible */ }
+        }
+
+        function tocarSonidoAcierto() {
+            try {
+                const ctx = obtenerContextoAudio();
+                const t = ctx.currentTime;
+                const notas = [523.25, 659.25, 783.99, 1046.5];
+                notas.forEach(function (freq, i) {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0, t + i * 0.10);
+                    gain.gain.linearRampToValueAtTime(0.22, t + i * 0.10 + 0.03);
+                    gain.gain.exponentialRampToValueAtTime(0.001, t + i * 0.10 + 0.25);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(t + i * 0.10);
+                    osc.stop(t + i * 0.10 + 0.26);
+                });
+            } catch (e) { /* audio no disponible */ }
+        }
+
+        function tocarSonidoError() {
+            try {
+                const ctx = obtenerContextoAudio();
+                const t = ctx.currentTime;
+                const pasos = [
+                    { freq: 330, inicio: 0.00, fin: 0.18 },
+                    { freq: 277, inicio: 0.16, fin: 0.36 },
+                    { freq: 220, inicio: 0.32, fin: 0.55 }
+                ];
+                pasos.forEach(function (paso) {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.value = paso.freq;
+                    gain.gain.setValueAtTime(0.18, t + paso.inicio);
+                    gain.gain.exponentialRampToValueAtTime(0.001, t + paso.fin);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(t + paso.inicio);
+                    osc.stop(t + paso.fin);
+                });
+            } catch (e) { /* audio no disponible */ }
+        }
+
+        function mostrarRespuesta() {
+            usoAyuda = true;
+            mensaje.textContent = 'La respuesta correcta es ' + respuestaCorrecta + '.';
+            mensaje.className = 'mt-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-lg font-bold text-amber-700';
+            mascota.textContent = '🧠';
+        }
+
+        function establecerTextoOperacion(texto) {
+            const textoElementoExistente = operacion.querySelector('.texto-operacion');
+            const textoElemento = textoElementoExistente || document.createElement('span');
+            textoElemento.className = 'texto-operacion';
+            textoElemento.textContent = texto;
+
+            operacion.textContent = '';
+            operacion.appendChild(textoElemento);
+        }
+
+        function limpiarConfetiOperacion() {
+            const capaActual = operacion.querySelector('.capa-confeti');
+            if (capaActual) {
+                capaActual.remove();
+            }
+        }
+
+        function activarEfectoConfetiOperacion() {
+            const colores = ['#ef4444', '#f59e0b', '#eab308', '#22c55e', '#06b6d4', '#3b82f6', '#8b5cf6', '#ec4899'];
+            limpiarConfetiOperacion();
+
+            const capaConfeti = document.createElement('div');
+            capaConfeti.className = 'capa-confeti';
+
+            for (let i = 0; i < 34; i += 1) {
+                const pieza = document.createElement('span');
+                pieza.className = 'pieza-confeti';
+                pieza.style.left = Math.floor(Math.random() * 100) + '%';
+                pieza.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+                pieza.style.animationDuration = (0.72 + Math.random() * 0.35).toFixed(2) + 's';
+                pieza.style.animationDelay = (Math.random() * 0.18).toFixed(2) + 's';
+                pieza.style.transform = 'rotate(' + Math.floor(Math.random() * 360) + 'deg)';
+                capaConfeti.appendChild(pieza);
+            }
+
+            operacion.appendChild(capaConfeti);
+
+            if (timeoutConfetiOperacion !== null) {
+                clearTimeout(timeoutConfetiOperacion);
+            }
+
+            timeoutConfetiOperacion = setTimeout(function () {
+                limpiarConfetiOperacion();
+                timeoutConfetiOperacion = null;
+            }, 1150);
+        }
+
+        function activarEfectoErrorOperacion() {
+            operacion.classList.remove('operacion-incorrecta');
+            void operacion.offsetWidth;
+            operacion.classList.add('operacion-incorrecta');
+
+            if (timeoutErrorOperacion !== null) {
+                clearTimeout(timeoutErrorOperacion);
+            }
+
+            timeoutErrorOperacion = setTimeout(function () {
+                operacion.classList.remove('operacion-incorrecta');
+                timeoutErrorOperacion = null;
+            }, 700);
+        }
+
+        btnVolverUsuarios.addEventListener('click', function () {
+            renderizarListaJugadores();
+            mostrarPantalla('usuarios');
+        });
+
+        btnIrPractica.addEventListener('click', function () {
+            if (!obtenerJugadorActual()) {
+                mostrarPantalla('usuarios');
+                return;
+            }
+
+            guardarEstadoJugadorActual();
+            operacionesEnPartidaActual = 0;
+            partidasEnSesion = 0;
+            actualizarProgreso();
+            actualizarPartidas();
+            reiniciarAyudasPartida();
+            mostrarPantalla('practica');
+            generarOperacion();
+        });
+
+        btnVolverConfiguracion.addEventListener('click', function () {
+            detenerTiempo();
+            operacionesEnPartidaActual = 0;
+            partidasEnSesion = 0;
+            actualizarProgreso();
+            actualizarPartidas();
+            reiniciarAyudasPartida();
+            cerrarPopupAyudaTablas();
+            mostrarPantalla('configuracion');
+        });
+
+        btnCrearJugador.addEventListener('click', crearJugador);
+
+        nuevoNickname.addEventListener('keydown', function (evento) {
+            if (evento.key === 'Enter') {
+                crearJugador();
+            }
+        });
+
+        botonesPersonaje.forEach(function (boton) {
+            boton.addEventListener('click', function () {
+                personajeSeleccionado = boton.dataset.personaje;
+                vistaPersonaje.textContent = personajeSeleccionado;
+                mascota.textContent = personajeSeleccionado;
+                actualizarResaltadoPersonajes();
+                guardarEstadoJugadorActual();
+            });
+        });
+
+        cantidadDigitos.addEventListener('change', function () {
+            guardarEstadoJugadorActual();
+        });
+
+        checkContraReloj.addEventListener('change', function () {
+            guardarEstadoJugadorActual();
+        });
+
+        checkSuma.addEventListener('change', function () {
+            actualizarResaltadoOperaciones();
+            guardarEstadoJugadorActual();
+        });
+
+        checkResta.addEventListener('change', function () {
+            actualizarResaltadoOperaciones();
+            guardarEstadoJugadorActual();
+        });
+
+        checkMultiplicacion.addEventListener('change', function () {
+            actualizarResaltadoOperaciones();
+            guardarEstadoJugadorActual();
+        });
+
+        checkDivision.addEventListener('change', function () {
+            actualizarResaltadoOperaciones();
+            guardarEstadoJugadorActual();
+        });
+
+        checkTablasMultiplicar.addEventListener('change', function () {
+            actualizarVistaModoTablas();
+            guardarEstadoJugadorActual();
+        });
+
+        botonesTabla.forEach(function (boton) {
+            boton.addEventListener('click', function () {
+                const tabla = Number(boton.dataset.tabla);
+
+                if (tablasSeleccionadas.includes(tabla)) {
+                    tablasSeleccionadas = tablasSeleccionadas.filter(function (item) {
+                        return item !== tabla;
+                    });
+                } else {
+                    tablasSeleccionadas.push(tabla);
+                    tablasSeleccionadas.sort(function (a, b) {
+                        return a - b;
+                    });
+                }
+
+                if (tablasSeleccionadas.length === 0) {
+                    tablasSeleccionadas = [tabla];
+                }
+
+                actualizarVistaModoTablas();
+                guardarEstadoJugadorActual();
+            });
+        });
+
+        btnSiguientePartida.addEventListener('click', function () {
+            popupFinPartida.classList.add('hidden');
+            popupFinPartida.classList.remove('flex');
+            reiniciarAyudasPartida();
+            generarOperacion();
+        });
+
+        btnAyudaTablas.addEventListener('click', abrirPopupAyudaTablas);
+        btnCerrarAyudaTablas.addEventListener('click', cerrarPopupAyudaTablas);
+        popupAyudaTablas.addEventListener('click', function (evento) {
+            if (evento.target === popupAyudaTablas) {
+                cerrarPopupAyudaTablas();
+            }
+        });
+
+        btnNuevaOperacion.addEventListener('click', generarOperacion);
+        btnRevisar.addEventListener('click', revisarRespuesta);
+        btnMostrarRespuesta.addEventListener('click', mostrarRespuesta);
+
+        respuesta.addEventListener('keydown', function (evento) {
+            if (evento.key === 'Enter') {
+                revisarRespuesta();
+            }
+        });
+
+        const btnMenuHamburguesa = document.getElementById('btnMenuHamburguesa');
+        const navPrincipal = document.getElementById('navPrincipal');
+
+        btnMenuHamburguesa.addEventListener('click', function () {
+            const estaAbierto = !navPrincipal.classList.contains('hidden');
+            navPrincipal.classList.toggle('hidden', estaAbierto);
+            btnMenuHamburguesa.setAttribute('aria-expanded', estaAbierto ? 'false' : 'true');
+        });
+
+        function inicializar() {
+            cargarJugadoresDesdeAlmacenamiento();
+            actualizarPuntaje();
+            actualizarRacha();
+            actualizarPartidas();
+            actualizarProgreso();
+            actualizarBotonAyudaTablas();
+            actualizarResaltadoOperaciones();
+            actualizarVistaModoTablas();
+            renderizarListaJugadores();
+
+            if (jugadorActualId && jugadores.some(function (jugador) { return jugador.id === jugadorActualId; })) {
+                seleccionarJugador(jugadorActualId);
+            } else {
+                actualizarCabecerasJugador();
+                actualizarResaltadoPersonajes();
+            }
+
+            mostrarPantalla('usuarios');
+        }
+
+        inicializar();
+    </script>
+</body>
+
+</html>

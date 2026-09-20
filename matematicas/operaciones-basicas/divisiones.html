@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EHT1GP3HET"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EHT1GP3HET');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Divisiones - Mate Aventuras</title>
+    <meta name="description"
+        content="Aprende sobre las divisiones, cómo practicarlas y consejos para dominarlas fácilmente." />
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-sky-200 via-fuchsia-100 to-amber-100 text-slate-800">
+    <div class="mx-auto max-w-5xl px-4 py-8">
+
+        <header class="mb-8 rounded-2xl border border-white/70 bg-white/85 p-5 shadow-lg backdrop-blur">
+            <div class="flex items-center justify-between gap-3">
+                <a href="../../index.html"
+                    class="text-2xl font-black text-fuchsia-700 hover:text-fuchsia-900 md:text-3xl">Mate Aventuras</a>
+                <button id="btnMenuHamburguesa"
+                    class="flex flex-col gap-1.5 rounded-xl border border-slate-200 bg-white p-2.5 md:hidden"
+                    aria-label="Abrir menú" aria-expanded="false" aria-controls="navPrincipal">
+                    <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                    <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                    <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                </button>
+            </div>
+            <nav id="navPrincipal" class="hidden mt-3 border-t border-slate-100 pt-3 md:block">
+                <ul class="flex flex-col gap-1 text-sm font-bold md:flex-row md:flex-wrap md:gap-2">
+                    <li><a href="../../index.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Inicio</a>
+                    </li>
+                    <li><a href="practicas.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-emerald-100 hover:text-emerald-700 transition">Practicar</a>
+                    </li>
+                    <li><a href="sumas.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Sumas</a>
+                    </li>
+                    <li><a href="restas.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Restas</a>
+                    </li>
+                    <li><a href="multiplicaciones.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Multiplicaciones</a>
+                    </li>
+                    <li><a href="divisiones.html"
+                            class="rounded-full bg-gradient-to-r from-amber-100 to-orange-200 px-4 py-1.5 text-amber-800 transition">Divisiones</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="mb-6 rounded-2xl border border-white/70 bg-white/85 p-7 shadow-lg backdrop-blur">
+            <p class="mb-2 text-sm font-black uppercase tracking-wide text-emerald-700">Operaciones básicas</p>
+            <div class="flex items-center gap-4">
+                <span class="text-6xl">➗</span>
+                <div>
+                    <h1 class="text-3xl font-black leading-tight text-fuchsia-800 md:text-4xl">La División</h1>
+                    <p class="mt-1 text-lg font-semibold text-slate-600">Repartir en partes iguales</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid gap-6 md:grid-cols-2">
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">¿Qué es la división?</h2>
+                <p class="mb-3 leading-relaxed text-slate-700">La división es la operación de <strong>repartir una
+                        cantidad en grupos iguales</strong>. Se representa con el símbolo <strong>÷</strong> y el
+                    resultado se llama <strong>cociente</strong>.</p>
+                <p class="mb-3 leading-relaxed text-slate-700">Por ejemplo, si tienes 20 dulces y quieres repartirlos
+                    entre 4 amigos por igual, divides:</p>
+                <div
+                    class="rounded-xl bg-gradient-to-r from-amber-50 to-orange-100 p-4 text-center text-3xl font-black text-slate-800">
+                    20 ÷ 4 = 5
+                </div>
+                <p class="mt-3 leading-relaxed text-slate-700">Las partes de una división son el
+                    <strong>dividendo</strong> (lo que se reparte), el <strong>divisor</strong> (entre cuántos se
+                    reparte), el <strong>cociente</strong> (el resultado) y el <strong>residuo</strong> (lo que sobra
+                    cuando no es exacta).
+                </p>
+            </section>
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">¿Para qué sirve dividir?</h2>
+                <p class="mb-3 leading-relaxed text-slate-700">La división aparece en situaciones de reparto y
+                    organización:</p>
+                <ul class="space-y-2 text-slate-700">
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">🍕</span><span>Dividir una pizza en
+                            partes iguales entre todos los comensales.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">💰</span><span>Repartir el costo de
+                            un regalo entre varios amigos.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">📦</span><span>Saber cuántas cajas
+                            se necesitan para guardar cierta cantidad de objetos.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">🏃</span><span>Calcular la velocidad
+                            promedio: distancia ÷ tiempo.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-0.5 text-lg">📅</span><span>Saber cuántas semanas
+                            caben en un mes: 28 ÷ 7 = 4 semanas.</span></li>
+                </ul>
+            </section>
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">Tipos de divisiones</h2>
+                <div class="space-y-4">
+                    <div class="rounded-xl bg-gradient-to-br from-emerald-50 to-cyan-50 p-4">
+                        <p class="font-black text-emerald-700">División exacta</p>
+                        <p class="mt-1 text-sm text-slate-600">El dividendo se reparte completamente sin sobrar nada. El
+                            residuo es 0. Ej: 18 ÷ 3 = 6, residuo 0.</p>
+                    </div>
+                    <div class="rounded-xl bg-gradient-to-br from-fuchsia-50 to-pink-50 p-4">
+                        <p class="font-black text-fuchsia-700">División inexacta</p>
+                        <p class="mt-1 text-sm text-slate-600">Sobran algunos elementos que no alcanzan para un grupo
+                            más. Ej: 17 ÷ 5 = 3, residuo 2 (sobran 2).</p>
+                    </div>
+                    <div class="rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 p-4">
+                        <p class="font-black text-amber-700">División con decimales</p>
+                        <p class="mt-1 text-sm text-slate-600">Se continúa dividiendo para expresar el resultado con
+                            punto decimal. Ej: 7 ÷ 2 = 3.5 (cada mitad de los 7).</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">💡 Consejos para aprender divisiones</h2>
+                <ul class="space-y-3 text-slate-700">
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-fuchsia-100 text-sm font-black text-fuchsia-700">1</span>
+                        <span><strong>Domina primero las tablas.</strong> La división es la inversa de la
+                            multiplicación. Si sabes que 6 × 7 = 42, entonces sabes que 42 ÷ 7 = 6 de inmediato.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cyan-100 text-sm font-black text-cyan-700">2</span>
+                        <span><strong>Piensa en grupos.</strong> 24 ÷ 6 significa "¿cuántos grupos de 6 caben en 24?".
+                            Visualizar el reparto hace el concepto más natural.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-sm font-black text-emerald-700">3</span>
+                        <span><strong>Verifica con la multiplicación.</strong> Si hiciste 36 ÷ 9 = 4, comprueba: 4 × 9 =
+                            36. Así detectas errores y refuerzas ambas operaciones.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-100 text-sm font-black text-amber-700">4</span>
+                        <span><strong>Aprende las divisibilidades.</strong> Un número es divisible entre 2 si termina en
+                            par, entre 5 si termina en 0 o 5, entre 10 si termina en 0. ¡Detecta divisores
+                            rápido!</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pink-100 text-sm font-black text-pink-700">5</span>
+                        <span><strong>Practica con objetos reales.</strong> Reparte fichas, botones o chocolates entre
+                            varios grupos. La experiencia física ayuda a interiorizar el concepto de división.</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="rounded-2xl border border-white/70 bg-white/85 p-6 shadow-lg backdrop-blur md:col-span-2">
+                <h2 class="mb-4 text-xl font-black text-fuchsia-700">Estrategias para dividir más rápido</h2>
+                <div class="grid gap-4 sm:grid-cols-3">
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center">
+                        <p class="text-3xl">🔍</p>
+                        <p class="mt-2 font-black text-slate-800">Factorizar el dividendo</p>
+                        <p class="mt-1 text-sm text-slate-600">Para 96 ÷ 8, descompón: 80 ÷ 8 = 10 y 16 ÷ 8 = 2. Suma
+                            los cocientes: 10 + 2 = 12. Divide por partes.</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center">
+                        <p class="text-3xl">🔄</p>
+                        <p class="mt-2 font-black text-slate-800">Usar la inversa</p>
+                        <p class="mt-1 text-sm text-slate-600">Si no recuerdas 56 ÷ 8, pregúntate: "¿8 × ? = 56?"
+                            Recorrer la tabla del 8 te da la respuesta: 8 × 7 = 56.</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center">
+                        <p class="text-3xl">✂️</p>
+                        <p class="mt-2 font-black text-slate-800">Simplificar primero</p>
+                        <p class="mt-1 text-sm text-slate-600">Si ambos números son pares, divide ambos entre 2 primero.
+                            60 ÷ 12 → 30 ÷ 6 → 15 ÷ 3 = 5. ¡Números más pequeños!</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="practicas.html"
+                class="inline-block rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-8 py-3 text-lg font-bold text-white shadow-md transition hover:scale-[1.02] hover:from-fuchsia-600 hover:to-cyan-600">
+                ¡Practicar divisiones en Mate Aventuras!
+            </a>
+        </div>
+
+        <footer class="mt-8 text-center text-sm font-semibold text-slate-500">
+            © 2026 Mate Aventuras · Matemáticas para primaria
+        </footer>
+    </div>
+    <script>
+        var btnMenuHamburguesa = document.getElementById('btnMenuHamburguesa');
+        var navPrincipal = document.getElementById('navPrincipal');
+        btnMenuHamburguesa.addEventListener('click', function () {
+            var estaAbierto = !navPrincipal.classList.contains('hidden');
+            navPrincipal.classList.toggle('hidden', estaAbierto);
+            btnMenuHamburguesa.setAttribute('aria-expanded', estaAbierto ? 'false' : 'true');
+        });
+    </script>
+</body>
+
+</html>
