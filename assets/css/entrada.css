@@ -1,0 +1,6 @@
+/* Fuente del CSS del sitio. Genera assets/css/estilos.css con `npm run css`. */
+@import "./mate.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
