@@ -50,7 +50,7 @@
                     <li><span
                             class="rounded-full bg-gradient-to-r from-cyan-100 to-pink-100 px-4 py-1.5 text-cyan-800">Inicio</span>
                     </li>
-                    <li><a href="matematicas/operaciones-basicas/practica-tablas-de-multiplicar.html"
+                    <li><a href="practicas.html"
                             class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-emerald-100 hover:text-emerald-700 transition">Practicar</a>
                     </li>
                     <li><a href="matematicas/operaciones-basicas/sumas.html"
@@ -85,7 +85,7 @@
             </p>
 
             <div class="mt-8 flex flex-wrap gap-3">
-                <a href="matematicas/operaciones-basicas/practica-tablas-de-multiplicar.html"
+                <a href="practicas.html"
                     class="rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-6 py-3 text-lg font-bold text-white shadow-md transition hover:scale-[1.02] hover:from-fuchsia-600 hover:to-cyan-600">
                     Ir a practicar
                 </a>
@@ -117,15 +117,7 @@
             </article>
         </section>
     </main>
-    <script>
-        var btnMenuHamburguesa = document.getElementById('btnMenuHamburguesa');
-        var navPrincipal = document.getElementById('navPrincipal');
-        btnMenuHamburguesa.addEventListener('click', function () {
-            var estaAbierto = !navPrincipal.classList.contains('hidden');
-            navPrincipal.classList.toggle('hidden', estaAbierto);
-            btnMenuHamburguesa.setAttribute('aria-expanded', estaAbierto ? 'false' : 'true');
-        });
-    </script>
+    <script src="assets/js/navegacion.js"></script>
 </body>
 
 </html>

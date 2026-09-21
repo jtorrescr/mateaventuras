@@ -1,0 +1,188 @@
+@keyframes saltar {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes brillar {
+    0% {
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 24px rgba(34, 197, 94, 0.35);
+    }
+
+    100% {
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+
+@keyframes caerConfeti {
+    0% {
+        transform: translateY(-24px) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(190px) rotate(560deg);
+        opacity: 0;
+    }
+}
+
+@keyframes errorTemblor {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-8px);
+    }
+
+    40% {
+        transform: translateX(7px);
+    }
+
+    60% {
+        transform: translateX(-5px);
+    }
+
+    80% {
+        transform: translateX(4px);
+    }
+}
+
+@keyframes errorFlash {
+    0% {
+        background-color: #ffffff;
+        border-color: rgb(226 232 240);
+        box-shadow: 0 0 0 rgba(239, 68, 68, 0);
+    }
+
+    35% {
+        background-color: #fee2e2;
+        border-color: rgb(248 113 113);
+        box-shadow: 0 0 0 5px rgba(248, 113, 113, 0.22);
+    }
+
+    100% {
+        background-color: #ffffff;
+        border-color: rgb(226 232 240);
+        box-shadow: 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+.saltar {
+    animation: saltar 0.45s ease-in-out;
+}
+
+.brillar {
+    animation: brillar 0.7s ease-in-out;
+}
+
+.operacion-con-confeti {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.texto-operacion {
+    position: relative;
+    z-index: 2;
+}
+
+.capa-confeti {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.pieza-confeti {
+    position: absolute;
+    top: -24px;
+    width: 9px;
+    height: 16px;
+    border-radius: 2px;
+    animation-name: caerConfeti;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.operacion-incorrecta {
+    animation: errorTemblor 0.42s ease-out, errorFlash 0.68s ease-out;
+}
+
+@keyframes parpadeoFilaAyuda {
+
+    0%,
+    100% {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-color: rgb(207 250 254);
+        box-shadow: 0 0 0 rgba(217, 70, 239, 0);
+    }
+
+    50% {
+        background-color: #fef08a;
+        border-color: rgb(217, 70, 239);
+        box-shadow: 0 0 12px rgba(217, 70, 239, 0.5);
+    }
+}
+
+.fila-parpadeo {
+    animation: parpadeoFilaAyuda 0.6s ease-in-out 4;
+}
+
+@keyframes arcoirisPersonaje {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.personaje-seleccionado-arcoiris {
+    border-color: transparent;
+    background-image: linear-gradient(120deg,
+            #f43f5e,
+            #fb7185,
+            #f59e0b,
+            #facc15,
+            #22c55e,
+            #06b6d4,
+            #3b82f6,
+            #8b5cf6,
+            #f43f5e);
+    background-size: 320% 320%;
+    animation: arcoirisPersonaje 2.2s linear infinite;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.85), 0 10px 20px rgba(59, 130, 246, 0.25);
+    transform: translateY(-1px);
+}
+
+.moneda-voladora {
+    position: fixed;
+    z-index: 60;
+    font-size: 1.75rem;
+    line-height: 1;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        top 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        font-size 0.7s ease-in,
+        opacity 0.7s ease-in;
+    opacity: 1;
+}
