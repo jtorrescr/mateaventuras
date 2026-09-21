@@ -252,6 +252,7 @@
 
         let respuestaCorrecta = 0;
         let usoAyuda = false;
+        let huboError = false;
         let numeroOperacion1 = 0;
         let numeroOperacion2 = 0;
         let timeoutParpadeoAyudaTablas = null;
@@ -450,6 +451,7 @@
             MateAventuras.uiJugadores.guardarEstado();
             MateAventuras.marcador.reiniciarPartida();
             usoAyuda = false;
+            huboError = false;
             generarOperacion();
         }
 
@@ -553,6 +555,7 @@
             MateAventuras.efectos.establecerTextoOperacion(operacion, factor1 + ' × ' + factor2);
             renderizarOpcionesRespuesta(respuestaCorrecta);
             usoAyuda = false;
+            huboError = false;
             MateAventuras.uiJugadores.mostrarMascota();
             tarjetaOperacion.classList.remove('brillar');
             operacion.classList.remove('operacion-incorrecta');
@@ -565,7 +568,7 @@
                 });
                 boton.classList.add('border-emerald-500', 'bg-emerald-100', 'text-emerald-700');
 
-                const partidaCompleta = MateAventuras.marcador.registrarAcierto(usoAyuda, boton);
+                const partidaCompleta = MateAventuras.marcador.registrarAcierto(usoAyuda || huboError, boton);
                 MateAventuras.uiJugadores.guardarEstado();
                 MateAventuras.uiJugadores.renderizarLista();
 
@@ -584,6 +587,7 @@
             } else {
                 boton.disabled = true;
                 boton.classList.add('border-red-400', 'bg-red-100', 'text-red-600', 'opacity-60');
+                huboError = true;
                 MateAventuras.marcador.reiniciarRacha();
                 MateAventuras.efectos.temblorError(operacion);
                 MateAventuras.sonidos.error();
@@ -620,6 +624,7 @@
             MateAventuras.marcador.iniciar({
                 alSiguientePartida: function () {
                     usoAyuda = false;
+                    huboError = false;
                     generarOperacion();
                 }
             });
