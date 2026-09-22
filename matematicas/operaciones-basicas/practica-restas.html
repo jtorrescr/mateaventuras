@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EHT1GP3HET"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EHT1GP3HET');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mate Aventuras - Práctica de Restas para Niños de Escuela Primaria</title>
+    <meta name="description"
+        content="Mate Aventuras: practica restas de 1, 2 y 3 cifras con niveles de dificultad y ayuda visual de resta en columna con préstamo. Ideal para niños de primaria." />
+    <meta property="og:title" content="Mate Aventuras - Práctica de Restas" />
+    <meta property="og:description"
+        content="Practica restas de una, dos y tres cifras con seguimiento de progreso. Gratis para niños de primaria." />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="https://mateaventuras.com/matematicas/operaciones-basicas/practica-restas.html" />
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>" />
+    <link rel="stylesheet" href="../../assets/css/estilos.css" />
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-sky-200 via-fuchsia-100 to-amber-100 text-slate-800">
+    <main class="mx-auto max-w-5xl px-4 py-8">
+        <header class="mb-8 rounded-2xl border border-white/70 bg-white/85 p-5 shadow-lg backdrop-blur">
+            <div class="flex items-center justify-between gap-3">
+                <h1 class="text-2xl font-black text-fuchsia-700 md:text-3xl">Mate Aventuras</h1>
+                <div class="flex items-center gap-2">
+                    <p
+                        class="hidden rounded-full bg-gradient-to-r from-cyan-100 to-pink-100 px-3 py-1 text-sm font-bold text-cyan-700 sm:block">
+                        Matemáticas con calma
+                    </p>
+                    <button id="btnMenuHamburguesa"
+                        class="flex flex-col gap-1.5 rounded-xl border border-slate-200 bg-white p-2.5 md:hidden"
+                        aria-label="Abrir menú" aria-expanded="false" aria-controls="navPrincipal">
+                        <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                        <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                        <span class="block h-0.5 w-5 rounded-full bg-slate-700 transition-all"></span>
+                    </button>
+                </div>
+            </div>
+            <nav id="navPrincipal" class="hidden mt-3 border-t border-slate-100 pt-3 md:block">
+                <ul class="flex flex-col gap-1 text-sm font-bold md:flex-row md:flex-wrap md:gap-2">
+                    <li><a href="../../index.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-cyan-100 hover:text-cyan-700 transition">Inicio</a>
+                    </li>
+                    <li><a href="../../practicas.html"
+                            class="rounded-full bg-gradient-to-r from-emerald-100 to-lime-100 px-4 py-1.5 text-emerald-800 transition hover:from-emerald-200 hover:to-lime-200">Practicar</a>
+                    </li>
+                    <li><a href="sumas.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-cyan-100 hover:text-cyan-700 transition">Sumas</a>
+                    </li>
+                    <li><a href="restas.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-pink-100 hover:text-rose-700 transition">Restas</a>
+                    </li>
+                    <li><a href="multiplicaciones.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-fuchsia-100 hover:text-fuchsia-700 transition">Multiplicaciones</a>
+                    </li>
+                    <li><a href="divisiones.html"
+                            class="rounded-full px-4 py-1.5 text-slate-600 hover:bg-amber-100 hover:text-amber-700 transition">Divisiones</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="pantallaPractica"
+            class="rounded-2xl border border-white/70 bg-white/85 p-7 shadow-lg backdrop-blur">
+            <h2 class="text-sm font-black uppercase tracking-wide text-emerald-700">Restas</h2>
+
+            <div class="mt-6 grid gap-5 lg:grid-cols-[1fr_1.3fr]">
+                <aside class="rounded-2xl bg-gradient-to-br from-emerald-50 to-cyan-50 p-5">
+                    <div class="mt-2 flex items-center gap-3">
+                        <button id="mascota" type="button" class="text-6xl leading-none transition hover:scale-105"
+                            aria-label="Cambiar personaje" title="Haz clic para cambiar de personaje">🦊</button>
+                        <div class="flex flex-1 items-center gap-2">
+                            <p id="nombreJugadorPractica" tabindex="0" role="button"
+                                class="cursor-pointer rounded-lg px-2 py-1 text-xl font-black text-fuchsia-700 hover:bg-white/70"
+                                title="Haz clic para editar el nombre"></p>
+                            <input id="inputNombreJugador" type="text" maxlength="15"
+                                class="hidden w-32 rounded-lg border border-fuchsia-300 bg-white px-2 py-1 text-xl font-black text-fuchsia-700 outline-none" />
+                            <button id="btnAbrirJugadores" type="button"
+                                class="rounded-lg border border-slate-200 bg-white p-1.5 text-lg hover:bg-slate-100"
+                                aria-label="Seleccionar jugador" title="Seleccionar o crear jugador">👥</button>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 grid grid-cols-3 gap-2">
+                        <div class="rounded-xl border border-slate-200 bg-white p-3 text-center">
+                            <p class="text-xs font-bold uppercase text-slate-500">Puntaje</p>
+                            <p id="puntaje" class="text-2xl font-black text-slate-900">0 🪙</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-white p-3 text-center">
+                            <p class="text-xs font-bold uppercase text-slate-500">Racha</p>
+                            <p id="racha" class="text-2xl font-black text-slate-900">0 🔥</p>
+                        </div>
+                        <div class="rounded-xl border border-fuchsia-200 bg-fuchsia-50 p-3 text-center">
+                            <p class="text-xs font-bold uppercase text-fuchsia-600">Partidas</p>
+                            <p id="partidasTexto" class="text-2xl font-black text-fuchsia-800">0 🎮</p>
+                        </div>
+                    </div>
+
+                    <div id="seccionDificultad"
+                        class="mt-4 rounded-xl border-2 border-cyan-300 bg-gradient-to-br from-cyan-100 via-fuchsia-100 to-amber-100 p-3 shadow-sm">
+                        <p class="mb-2 font-black text-fuchsia-800">Elige la dificultad</p>
+                        <div class="grid gap-2" role="group" aria-label="Nivel de dificultad">
+                            <button
+                                class="boton-nivel flex items-center gap-3 rounded-lg border-2 border-cyan-300 bg-white/90 px-3 py-2 text-left text-cyan-800 shadow-sm transition hover:scale-[1.02] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-nivel="1">
+                                <span
+                                    class="nivel-numero flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 font-black text-cyan-800">1</span>
+                                <span class="flex-1">
+                                    <span class="block text-lg font-black leading-tight">9 − 4</span>
+                                    <span class="block text-xs font-bold opacity-70">1 cifra − 1 cifra</span>
+                                </span>
+                            </button>
+                            <button
+                                class="boton-nivel flex items-center gap-3 rounded-lg border-2 border-cyan-300 bg-white/90 px-3 py-2 text-left text-cyan-800 shadow-sm transition hover:scale-[1.02] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-nivel="2">
+                                <span
+                                    class="nivel-numero flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 font-black text-cyan-800">2</span>
+                                <span class="flex-1">
+                                    <span class="block text-lg font-black leading-tight">84 − 7</span>
+                                    <span class="block text-xs font-bold opacity-70">2 cifras − 1 cifra</span>
+                                </span>
+                            </button>
+                            <button
+                                class="boton-nivel flex items-center gap-3 rounded-lg border-2 border-cyan-300 bg-white/90 px-3 py-2 text-left text-cyan-800 shadow-sm transition hover:scale-[1.02] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-nivel="3">
+                                <span
+                                    class="nivel-numero flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 font-black text-cyan-800">3</span>
+                                <span class="flex-1">
+                                    <span class="block text-lg font-black leading-tight">84 − 47</span>
+                                    <span class="block text-xs font-bold opacity-70">2 cifras − 2 cifras</span>
+                                </span>
+                            </button>
+                            <button
+                                class="boton-nivel flex items-center gap-3 rounded-lg border-2 border-cyan-300 bg-white/90 px-3 py-2 text-left text-cyan-800 shadow-sm transition hover:scale-[1.02] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-nivel="4">
+                                <span
+                                    class="nivel-numero flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 font-black text-cyan-800">4</span>
+                                <span class="flex-1">
+                                    <span class="block text-lg font-black leading-tight">384 − 47</span>
+                                    <span class="block text-xs font-bold opacity-70">3 cifras − 2 cifras</span>
+                                </span>
+                            </button>
+                            <button
+                                class="boton-nivel flex items-center gap-3 rounded-lg border-2 border-cyan-300 bg-white/90 px-3 py-2 text-left text-cyan-800 shadow-sm transition hover:scale-[1.02] hover:border-fuchsia-400 hover:bg-fuchsia-50"
+                                data-nivel="5">
+                                <span
+                                    class="nivel-numero flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 font-black text-cyan-800">5</span>
+                                <span class="flex-1">
+                                    <span class="block text-lg font-black leading-tight">384 − 176</span>
+                                    <span class="block text-xs font-bold opacity-70">3 cifras − 3 cifras</span>
+                                </span>
+                            </button>
+                        </div>
+                        <p id="nivelSeleccionadoTexto" class="mt-2 text-sm font-bold text-fuchsia-700">Nivel 1: 1 cifra
+                            − 1 cifra</p>
+                    </div>
+                </aside>
+
+                <div id="tarjetaOperacion" class="rounded-2xl bg-gradient-to-br from-rose-50 to-amber-50 p-5">
+                    <div class="mb-2 flex items-center justify-between gap-2">
+                        <p class="text-sm font-black uppercase tracking-wide text-slate-500">Resuelve la operación</p>
+                        <div class="flex gap-2">
+                            <button id="btnAyuda"
+                                class="rounded-xl border border-cyan-300 bg-cyan-50 px-3 py-2 text-lg font-black text-cyan-800 shadow-sm transition hover:bg-cyan-100"
+                                aria-label="Ayuda de resta en columna" title="Ver la resta en columna">
+                                💡
+                            </button>
+                            <button id="btnNuevaOperacion"
+                                class="rounded-xl border border-orange-300 bg-orange-50 px-3 py-2 text-lg font-black text-orange-800 shadow-sm transition hover:bg-orange-100"
+                                aria-label="Nueva operación" title="Cargar una nueva operación">
+                                🔄
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 flex items-center gap-1">
+                        <span id="dot-0"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-1"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-2"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-3"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-4"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-5"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-6"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span id="dot-7"
+                            class="h-4 w-4 rounded-full border-2 border-fuchsia-300 bg-white transition-all"></span>
+                        <span class="ml-2 text-xs font-bold text-slate-500" id="textoProgreso">0 / 8</span>
+                    </div>
+                    <div id="operacion"
+                        class="operacion-con-confeti mb-5 rounded-2xl border border-slate-200 bg-white px-6 py-8 text-center text-4xl font-black text-slate-900 sm:text-5xl md:text-6xl">
+                        <span class="texto-operacion">9 − 4</span>
+                    </div>
+
+                    <p class="mb-2 block font-bold text-slate-700">Tu respuesta</p>
+                    <div id="opcionesRespuesta" class="grid grid-cols-2 gap-3 sm:grid-cols-5" role="group"
+                        aria-label="Opciones de respuesta"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="popupAyuda" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/65 px-4"
+        role="dialog" aria-modal="true" aria-labelledby="tituloAyuda">
+        <div class="max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl md:p-8">
+            <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <h2 id="tituloAyuda" class="text-2xl font-black text-cyan-700">Resta en columna</h2>
+                    <p id="subtituloAyuda" class="text-sm font-semibold text-slate-600"></p>
+                </div>
+                <button id="btnCerrarAyuda"
+                    class="rounded-xl border border-slate-300 bg-slate-100 px-4 py-2 font-bold text-slate-700 hover:bg-slate-200">Cerrar</button>
+            </div>
+            <div id="contenedorAyuda" class="flex justify-center overflow-x-auto py-2"></div>
+        </div>
+    </div>
+
+    <script src="../../assets/js/navegacion.js"></script>
+    <script src="../../assets/js/sonidos.js"></script>
+    <script src="../../assets/js/efectos.js"></script>
+    <script src="../../assets/js/jugadores.js"></script>
+    <script src="../../assets/js/marcador.js"></script>
+    <script src="../../assets/js/ui-jugadores.js"></script>
+    <script src="../../assets/js/practicas/restas.js"></script>
+</body>
+
+</html>
