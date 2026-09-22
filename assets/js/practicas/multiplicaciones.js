@@ -330,7 +330,7 @@
             });
             boton.classList.add('border-emerald-500', 'bg-emerald-100', 'text-emerald-700');
 
-            const partidaCompleta = MateAventuras.marcador.registrarAcierto(usoAyuda || huboError, boton);
+            const partidaCompleta = MateAventuras.marcador.registrarAcierto(usoAyuda || huboError, boton, nivelSeleccionado);
             MateAventuras.uiJugadores.guardarEstado();
             MateAventuras.uiJugadores.renderizarLista();
 

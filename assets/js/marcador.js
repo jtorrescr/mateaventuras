@@ -125,12 +125,13 @@ MateAventuras.marcador = (function () {
         actualizarRacha();
     }
 
-    function registrarAcierto(conAyuda, botonOrigen) {
+    function registrarAcierto(conAyuda, botonOrigen, monedas) {
+        const monedasOtorgadas = monedas || 1;
         const indiceOperacionResuelta = operacionesEnPartidaActual;
         operacionesEnPartidaActual += 1;
 
         if (!conAyuda) {
-            puntaje += 1;
+            puntaje += monedasOtorgadas;
             rachaActual += 1;
             MateAventuras.efectos.volarMoneda(botonOrigen, puntajeTexto);
         } else {
