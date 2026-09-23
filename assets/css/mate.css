@@ -186,3 +186,42 @@
         opacity 0.7s ease-in;
     opacity: 1;
 }
+
+@keyframes desplazarFondoBoton {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* El gradiente lleva el patrón fucsia→violeta→cian dos veces seguidas y mide el
+   doble del botón, así que al recorrer un ancho completo vuelve al punto de
+   partida y el desplazamiento se ve continuo, sin saltos ni vaivén. */
+.boton-practicar {
+    background-image: linear-gradient(90deg,
+            #d946ef,
+            #8b5cf6,
+            #06b6d4,
+            #8b5cf6,
+            #d946ef,
+            #8b5cf6,
+            #06b6d4,
+            #8b5cf6,
+            #d946ef);
+    background-size: 200% 100%;
+    animation: desplazarFondoBoton 3.5s linear infinite;
+}
+
+.boton-practicar:hover {
+    animation-duration: 1.5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .boton-practicar {
+        animation: none;
+        background-position: 0% 50%;
+    }
+}
