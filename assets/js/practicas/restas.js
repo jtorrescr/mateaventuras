@@ -219,7 +219,17 @@
         usoAyuda = true;
 
         contenedorAyuda.innerHTML = '';
-        contenedorAyuda.appendChild(construirVisualResta(numeroOperacion1, numeroOperacion2));
+
+        const envoltorio = document.createElement('div');
+        envoltorio.className = 'flex flex-col items-center gap-4';
+
+        const operacionOriginal = document.createElement('p');
+        operacionOriginal.className = 'text-2xl font-black text-slate-500';
+        operacionOriginal.textContent = numeroOperacion1 + ' − ' + numeroOperacion2;
+
+        envoltorio.appendChild(operacionOriginal);
+        envoltorio.appendChild(construirVisualResta(numeroOperacion1, numeroOperacion2));
+        contenedorAyuda.appendChild(envoltorio);
 
         subtituloAyuda.textContent = 'Resta de derecha a izquierda. Si el número de arriba es menor, pide prestado 1 a la columna de la izquierda (naranja).';
 

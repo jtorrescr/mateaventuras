@@ -185,7 +185,17 @@
         usoAyuda = true;
 
         contenedorAyuda.innerHTML = '';
-        contenedorAyuda.appendChild(construirVisualSuma(numeroOperacion1, numeroOperacion2));
+
+        const envoltorio = document.createElement('div');
+        envoltorio.className = 'flex flex-col items-center gap-4';
+
+        const operacionOriginal = document.createElement('p');
+        operacionOriginal.className = 'text-2xl font-black text-slate-500';
+        operacionOriginal.textContent = numeroOperacion1 + ' + ' + numeroOperacion2;
+
+        envoltorio.appendChild(operacionOriginal);
+        envoltorio.appendChild(construirVisualSuma(numeroOperacion1, numeroOperacion2));
+        contenedorAyuda.appendChild(envoltorio);
 
         subtituloAyuda.textContent = 'Suma de derecha a izquierda. Si una columna da 10 o más, el 1 naranja "se lleva" a la columna de al lado.';
 
