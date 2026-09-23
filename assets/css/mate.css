@@ -225,3 +225,59 @@
         background-position: 0% 50%;
     }
 }
+
+@keyframes pistaNombreEditable {
+
+    0%,
+    100% {
+        border-color: #f0abfc;
+        box-shadow: 0 0 0 rgba(217, 70, 239, 0);
+    }
+
+    50% {
+        border-color: rgb(217, 70, 239);
+        box-shadow: 0 0 10px rgba(217, 70, 239, 0.45);
+    }
+}
+
+/* El lápiz va como ::after y no como un <span> dentro del elemento, porque el
+   nombre se pinta con textContent y un hijo real se borraría en cada
+   actualización de la cabecera. */
+.nombre-editable::after {
+    content: "✏️";
+    display: inline-block;
+    margin-left: 0.35rem;
+    font-size: 0.65em;
+    opacity: 0.7;
+    vertical-align: middle;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.nombre-editable:hover::after,
+.nombre-editable:focus-visible::after {
+    opacity: 1;
+    transform: rotate(-15deg) scale(1.15);
+}
+
+/* Tres pulsos al abrir la página para que se note que el nombre se puede tocar.
+   Se corta en cuanto hay hover o foco: la animación gana sobre las reglas
+   normales y si no, taparía el color de borde del hover. */
+.nombre-editable {
+    animation: pistaNombreEditable 0.9s ease-in-out 3;
+}
+
+.nombre-editable:hover,
+.nombre-editable:focus-visible {
+    animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nombre-editable {
+        animation: none;
+    }
+
+    .nombre-editable:hover::after,
+    .nombre-editable:focus-visible::after {
+        transform: none;
+    }
+}
