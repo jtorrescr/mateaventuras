@@ -127,6 +127,7 @@ MateAventuras.uiJugadores = (function () {
         MateAventuras.jugadores.guardarEstadoActual({
             personaje: personajeSeleccionado,
             puntaje: MateAventuras.marcador.obtenerPuntaje(),
+            techoPuntaje: MateAventuras.marcador.obtenerTecho(),
             configuracion: opciones.obtenerConfiguracion()
         });
     }
@@ -138,7 +139,7 @@ MateAventuras.uiJugadores = (function () {
     function aplicarJugador(jugador) {
         MateAventuras.jugadores.establecerActual(jugador.id);
         personajeSeleccionado = jugador.personaje || MateAventuras.jugadores.PERSONAJE_PREDETERMINADO;
-        MateAventuras.marcador.reiniciar(jugador.puntaje || 0);
+        MateAventuras.marcador.reiniciar(jugador.puntaje || 0, jugador.techoPuntaje || 0);
         opciones.aplicarConfiguracion(jugador);
         actualizarCabecera();
         actualizarResaltadoPersonajes();

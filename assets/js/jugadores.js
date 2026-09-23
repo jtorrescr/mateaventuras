@@ -17,10 +17,37 @@ MateAventuras.jugadores = (function () {
         return 'j-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
     }
 
+    function enteroNoNegativo(valor) {
+        const numero = Number(valor);
+        return Number.isFinite(numero) && numero > 0 ? Math.floor(numero) : 0;
+    }
+
+    // En un sitio estático no hay forma de impedir que alguien edite localStorage,
+    // pero sí de descartar valores imposibles: nadie puede tener más monedas de las
+    // que llegó a poder ganar jugando.
+    function normalizarJugador(jugador) {
+        jugador.puntaje = enteroNoNegativo(jugador.puntaje);
+        jugador.totalPartidas = enteroNoNegativo(jugador.totalPartidas);
+
+        // Jugadores guardados antes de que existiera el techo: su puntaje actual pasa a ser la base.
+        const techo = enteroNoNegativo(jugador.techoPuntaje);
+        jugador.techoPuntaje = techo > 0 ? techo : jugador.puntaje;
+
+        if (jugador.puntaje > jugador.techoPuntaje) {
+            jugador.puntaje = jugador.techoPuntaje;
+        }
+
+        return jugador;
+    }
+
     function cargar() {
         try {
             const datosGuardados = localStorage.getItem(claveAlmacenamientoJugadores);
-            jugadores = datosGuardados ? JSON.parse(datosGuardados) : [];
+            const datos = datosGuardados ? JSON.parse(datosGuardados) : [];
+
+            jugadores = Array.isArray(datos) ? datos.filter(function (jugador) {
+                return jugador !== null && typeof jugador === 'object';
+            }).map(normalizarJugador) : [];
         } catch (e) {
             jugadores = [];
             localStorage.removeItem(claveAlmacenamientoJugadores);
@@ -80,6 +107,7 @@ MateAventuras.jugadores = (function () {
             nickname: nombre || NOMBRE_PREDETERMINADO,
             personaje: personaje || PERSONAJE_PREDETERMINADO,
             puntaje: 0,
+            techoPuntaje: 0,
             totalPartidas: 0,
             configuracion: configuracion || {}
         };
@@ -122,6 +150,7 @@ MateAventuras.jugadores = (function () {
         }
 
         jugador.puntaje = 0;
+        jugador.techoPuntaje = 0;
         guardar();
     }
 
@@ -139,6 +168,7 @@ MateAventuras.jugadores = (function () {
 
         jugador.personaje = estado.personaje;
         jugador.puntaje = estado.puntaje;
+        jugador.techoPuntaje = estado.techoPuntaje;
         jugador.totalPartidas = jugador.totalPartidas || 0;
         jugador.configuracion = Object.assign({}, jugador.configuracion || {}, estado.configuracion || {});
         guardar();

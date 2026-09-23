@@ -4,6 +4,9 @@ MateAventuras.marcador = (function () {
     const OPERACIONES_POR_PARTIDA = 8;
 
     let puntaje = 0;
+    // Máximo de monedas que el jugador llegó a poder ganar. Se guarda junto al puntaje
+    // para poder descartar puntajes imposibles editados a mano en localStorage.
+    let techoPuntaje = 0;
     let rachaActual = 0;
     let operacionesEnPartidaActual = 0;
     let partidasEnSesion = 0;
@@ -96,8 +99,9 @@ MateAventuras.marcador = (function () {
         actualizarProgreso();
     }
 
-    function reiniciar(puntajeInicial) {
+    function reiniciar(puntajeInicial, techoInicial) {
         puntaje = puntajeInicial || 0;
+        techoPuntaje = techoInicial || 0;
         rachaActual = 0;
         operacionesEnPartidaActual = 0;
         partidasEnSesion = 0;
@@ -115,8 +119,13 @@ MateAventuras.marcador = (function () {
         return puntaje;
     }
 
+    function obtenerTecho() {
+        return techoPuntaje;
+    }
+
     function establecerPuntaje(valor) {
         puntaje = valor;
+        techoPuntaje = valor;
         actualizarPuntaje();
     }
 
@@ -127,6 +136,7 @@ MateAventuras.marcador = (function () {
 
     function registrarAcierto(conAyuda, botonOrigen, monedas) {
         const monedasOtorgadas = monedas || 1;
+        techoPuntaje += monedasOtorgadas;
         const indiceOperacionResuelta = operacionesEnPartidaActual;
         operacionesEnPartidaActual += 1;
 
@@ -170,6 +180,7 @@ MateAventuras.marcador = (function () {
         reiniciar: reiniciar,
         reiniciarPartida: reiniciarPartida,
         obtenerPuntaje: obtenerPuntaje,
+        obtenerTecho: obtenerTecho,
         establecerPuntaje: establecerPuntaje,
         reiniciarRacha: reiniciarRacha,
         registrarAcierto: registrarAcierto,
