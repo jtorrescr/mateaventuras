@@ -129,7 +129,7 @@
         for (let p = 0; p < totalColumnas; p += 1) {
             const i = totalColumnas - 1 - p;
             const celda = crearCelda('flex h-6 items-end justify-center');
-            if (i < datos.cifras && datos.llevadaEntra[i] > 0) {
+            if (datos.llevadaEntra[i] > 0) {
                 const chip = document.createElement('span');
                 chip.className = 'text-sm font-black text-amber-600';
                 chip.textContent = '+' + datos.llevadaEntra[i];
