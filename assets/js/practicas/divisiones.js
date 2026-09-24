@@ -12,9 +12,9 @@
     const NIVELES_DIVISION = {
         1: { divisor: [2, 5], cociente: [2, 10], conResiduo: false, descripcion: 'Tablas fáciles, exacta' },
         2: { divisor: [2, 9], cociente: [2, 10], conResiduo: false, descripcion: 'Todas las tablas, exacta' },
-        3: { divisor: [2, 9], cociente: [11, 99], conResiduo: false, descripcion: '3 cifras ÷ 1 cifra, exacta' },
+        3: { divisor: [2, 9], cociente: [11, 99], tresCifras: true, conResiduo: false, descripcion: '3 cifras ÷ 1 cifra, exacta' },
         4: { divisor: [3, 9], cociente: [2, 10], conResiduo: true, descripcion: 'Con residuo' },
-        5: { divisor: [3, 9], cociente: [11, 99], conResiduo: true, descripcion: '3 cifras, con residuo' }
+        5: { divisor: [3, 9], cociente: [11, 99], tresCifras: true, conResiduo: true, descripcion: '3 cifras, con residuo' }
     };
 
     function actualizarVistaNivel() {
@@ -109,37 +109,50 @@
         }
     }
 
+    // Marca la cifra que se baja del dividendo: se pinta como el dividendo (negra),
+    // mientras que lo que sobró de la resta anterior queda en azul.
+    function agregarRestoConBajada(rejilla, totalColumnas, valor, columnaFinal) {
+        const digitos = String(valor).split('');
+        const primeraColumna = columnaFinal - digitos.length + 1;
+
+        for (let columna = 0; columna < totalColumnas; columna += 1) {
+            if (columna >= primeraColumna && columna <= columnaFinal) {
+                const indice = columna - primeraColumna;
+                const esCifraBajada = indice === digitos.length - 1;
+                rejilla.appendChild(crearCelda(
+                    'text-2xl font-black ' + (esCifraBajada ? 'text-slate-900' : 'text-cyan-700'),
+                    digitos[indice]));
+            } else {
+                rejilla.appendChild(crearCelda(''));
+            }
+        }
+    }
+
+    // Disposición del cuaderno: el dividendo y sus restas a la izquierda, y al otro
+    // lado de la raya el divisor arriba con el cociente justo debajo.
     function construirVisualDivision(dividendo, divisor) {
         const datos = calcularDivisionLarga(dividendo, divisor);
         const cifras = datos.digitosDividendo.length;
-        const COLUMNA_DIVISOR = 0;
-        const COLUMNA_PARED = 1;
-        const totalColumnas = cifras + 2; // divisor, pared de la caja y un lugar por cifra del dividendo
+        const totalColumnas = cifras + 1; // una columna extra a la izquierda para el signo "−"
+
+        const envoltorio = document.createElement('div');
+        envoltorio.className = 'flex items-start justify-center';
 
         const rejilla = document.createElement('div');
         rejilla.className = 'grid items-center gap-y-1 text-center';
-        rejilla.style.gridTemplateColumns = 'auto auto repeat(' + cifras + ', minmax(2.25rem, 1fr))';
+        rejilla.style.gridTemplateColumns = 'repeat(' + totalColumnas + ', minmax(2.25rem, 1fr))';
 
-        // Fila del cociente, encima del techo de la caja
+        // Fila del dividendo
         for (let columna = 0; columna < totalColumnas; columna += 1) {
-            const indiceDigito = columna - COLUMNA_PARED - 1;
-            const digito = indiceDigito >= 0 ? datos.digitosCociente[indiceDigito] : null;
-            rejilla.appendChild(crearCelda('text-3xl font-black text-emerald-700', digito));
-        }
-
-        // Techo de la caja, solo sobre el dividendo
-        agregarLinea(rejilla, totalColumnas, COLUMNA_PARED + 1, totalColumnas - 1);
-
-        // Fila del dividendo, con el divisor afuera y la pared de la caja
-        rejilla.appendChild(crearCelda('pr-1 text-3xl font-black text-fuchsia-600', divisor));
-        rejilla.appendChild(crearCelda('h-10 border-l-4 border-slate-400'));
-        for (let i = 0; i < cifras; i += 1) {
-            rejilla.appendChild(crearCelda('text-3xl font-black text-slate-900', datos.digitosDividendo[i]));
+            const indiceDigito = columna - 1;
+            rejilla.appendChild(crearCelda(
+                'text-3xl font-black text-slate-900',
+                indiceDigito >= 0 ? datos.digitosDividendo[indiceDigito] : null));
         }
 
         // Un bloque por paso: lo que se resta, la raya y lo que queda
         datos.pasos.forEach(function (paso, indice) {
-            const columnaFinal = COLUMNA_PARED + 1 + paso.columna;
+            const columnaFinal = 1 + paso.columna;
             const digitosValor = String(paso.valor).length;
 
             agregarNumeroAlineado(rejilla, totalColumnas, paso.producto, columnaFinal, 'text-2xl font-black text-amber-600', '−');
@@ -148,14 +161,62 @@
             const siguiente = datos.pasos[indice + 1];
 
             if (siguiente) {
-                // Se baja la siguiente cifra: lo que sobró pasa a ser parte del próximo reparto.
-                agregarNumeroAlineado(rejilla, totalColumnas, siguiente.valor, COLUMNA_PARED + 1 + siguiente.columna, 'text-2xl font-black text-slate-700');
+                agregarRestoConBajada(rejilla, totalColumnas, siguiente.valor, 1 + siguiente.columna);
             } else {
                 agregarNumeroAlineado(rejilla, totalColumnas, paso.resto, columnaFinal, 'text-2xl font-black text-cyan-700');
             }
         });
 
-        return rejilla;
+        const caja = document.createElement('div');
+        caja.className = 'ml-1 self-start border-l-4 border-slate-400 pl-3 text-center';
+
+        const elementoDivisor = document.createElement('div');
+        elementoDivisor.className = 'text-3xl font-black text-fuchsia-600';
+        elementoDivisor.textContent = String(divisor);
+
+        const raya = document.createElement('div');
+        raya.className = 'my-1 border-t-4 border-slate-400';
+
+        const elementoCociente = document.createElement('div');
+        elementoCociente.className = 'text-3xl font-black text-emerald-700';
+        elementoCociente.textContent = datos.digitosCociente.filter(function (digito) {
+            return digito !== null;
+        }).join('');
+
+        caja.appendChild(elementoDivisor);
+        caja.appendChild(raya);
+        caja.appendChild(elementoCociente);
+
+        envoltorio.appendChild(rejilla);
+        envoltorio.appendChild(caja);
+
+        return envoltorio;
+    }
+
+    function crearChipLeyenda(clasePunto, texto) {
+        const chip = document.createElement('span');
+        chip.className = 'flex items-center gap-1.5';
+
+        const punto = document.createElement('span');
+        punto.className = 'h-3 w-3 rounded-full ' + clasePunto;
+
+        const etiqueta = document.createElement('span');
+        etiqueta.textContent = texto;
+
+        chip.appendChild(punto);
+        chip.appendChild(etiqueta);
+        return chip;
+    }
+
+    function crearLeyenda(resto) {
+        const leyenda = document.createElement('div');
+        leyenda.className = 'flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-bold text-slate-600';
+
+        leyenda.appendChild(crearChipLeyenda('bg-amber-500', 'lo que multiplicas y restas'));
+        leyenda.appendChild(crearChipLeyenda('bg-cyan-600', resto > 0 ? 'lo que va quedando, y al final el residuo' : 'lo que va quedando'));
+        leyenda.appendChild(crearChipLeyenda('bg-emerald-600', 'el resultado'));
+
+        return leyenda;
     }
 
     function construirAyuda(contenedor) {
@@ -171,18 +232,10 @@
         envoltorio.appendChild(operacionOriginal);
         envoltorio.appendChild(construirVisualDivision(dividendoActual, divisorActual));
 
-        const pista = document.createElement('p');
-        pista.className = 'max-w-md text-center text-sm font-semibold text-slate-600';
-        pista.textContent = 'Pregúntate "¿cuántas veces cabe el ' + divisorActual + '?", multiplica (naranja), resta y baja la siguiente cifra.';
-        envoltorio.appendChild(pista);
-
+        envoltorio.appendChild(crearLeyenda(datos.resto));
         contenedor.appendChild(envoltorio);
 
-        if (datos.resto > 0) {
-            return 'Reparte de izquierda a derecha. Lo que queda al final y ya no alcanza para otro grupo es el residuo (azul).';
-        }
-
-        return 'Reparte de izquierda a derecha. Cuando al final queda 0, la división es exacta.';
+        return 'Pregúntate "¿cuántas veces cabe el ' + divisorActual + '?", multiplica, resta y baja la siguiente cifra.';
     }
 
     function opcionesExactas(cociente, dividendo, divisor) {
@@ -254,7 +307,12 @@
     function crearRonda() {
         const nivel = NIVELES_DIVISION[nivelSeleccionado];
         const divisor = motor.aleatorio(nivel.divisor[0], nivel.divisor[1]);
-        const cociente = motor.aleatorio(nivel.cociente[0], nivel.cociente[1]);
+        // Con divisores pequeños hace falta un cociente mayor para que el dividendo
+        // llegue a las tres cifras que promete la etiqueta del nivel.
+        const cocienteMinimo = nivel.tresCifras
+            ? Math.max(nivel.cociente[0], Math.ceil(100 / divisor))
+            : nivel.cociente[0];
+        const cociente = motor.aleatorio(cocienteMinimo, nivel.cociente[1]);
         const residuo = nivel.conResiduo ? motor.aleatorio(1, divisor - 1) : 0;
         const dividendo = divisor * cociente + residuo;
 
