@@ -16,7 +16,8 @@ assets/
     css/mate.css           animaciones propias
     css/estilos.css        CSS generado — no editar a mano
     js/*.js                módulos compartidos (jugadores, marcador, efectos…)
-    js/practicas/*.js      lógica específica de cada práctica
+    js/practicas/motor.js  ciclo común de toda práctica (rondas, ayuda, arranque)
+    js/practicas/*.js      lógica propia de cada práctica sobre ese motor
 ```
 
 ## CSS

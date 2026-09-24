@@ -1,20 +1,8 @@
 (function () {
-    const mascota = document.getElementById('mascota');
+    const motor = MateAventuras.motor;
     const botonesNivel = document.querySelectorAll('.boton-nivel');
     const nivelSeleccionadoTexto = document.getElementById('nivelSeleccionadoTexto');
-    const operacion = document.getElementById('operacion');
-    const opcionesRespuesta = document.getElementById('opcionesRespuesta');
-    const tarjetaOperacion = document.getElementById('tarjetaOperacion');
-    const btnNuevaOperacion = document.getElementById('btnNuevaOperacion');
-    const btnAyuda = document.getElementById('btnAyuda');
-    const popupAyuda = document.getElementById('popupAyuda');
-    const subtituloAyuda = document.getElementById('subtituloAyuda');
-    const contenedorAyuda = document.getElementById('contenedorAyuda');
-    const btnCerrarAyuda = document.getElementById('btnCerrarAyuda');
 
-    let respuestaCorrecta = 0;
-    let usoAyuda = false;
-    let huboError = false;
     let numeroOperacion1 = 0;
     let numeroOperacion2 = 0;
     let nivelSeleccionado = 1;
@@ -27,65 +15,19 @@
         5: { cifras: [3, 3], descripcion: '3 cifras + 3 cifras' }
     };
 
-    function obtenerConfiguracionActual() {
-        return {
-            nivelSuma: nivelSeleccionado
-        };
-    }
-
-    function obtenerConfiguracionPredeterminada() {
-        return {
-            nivelSuma: 1
-        };
-    }
-
-    function aplicarConfiguracionJugador(jugador) {
-        const configuracion = MateAventuras.jugadores.obtenerConfiguracion(jugador, obtenerConfiguracionPredeterminada());
-
-        const nivel = Number(configuracion.nivelSuma);
-        nivelSeleccionado = NIVELES_SUMA[nivel] ? nivel : 1;
-
-        actualizarVistaNivel();
-    }
-
     function actualizarVistaNivel() {
-        const nivel = NIVELES_SUMA[nivelSeleccionado];
-        nivelSeleccionadoTexto.textContent = 'Nivel ' + nivelSeleccionado + ': ' + nivel.descripcion;
+        nivelSeleccionadoTexto.textContent = 'Nivel ' + nivelSeleccionado + ': ' + NIVELES_SUMA[nivelSeleccionado].descripcion;
 
-        botonesNivel.forEach(function (boton) {
-            const esSeleccionado = Number(boton.dataset.nivel) === nivelSeleccionado;
-            const numero = boton.querySelector('.nivel-numero');
-            boton.setAttribute('aria-pressed', esSeleccionado ? 'true' : 'false');
-
-            boton.classList.toggle('bg-gradient-to-r', esSeleccionado);
-            boton.classList.toggle('from-fuchsia-500', esSeleccionado);
-            boton.classList.toggle('to-cyan-500', esSeleccionado);
-            boton.classList.toggle('text-white', esSeleccionado);
-            boton.classList.toggle('border-fuchsia-500', esSeleccionado);
-            boton.classList.toggle('shadow-md', esSeleccionado);
-
-            boton.classList.toggle('bg-white/90', !esSeleccionado);
-            boton.classList.toggle('text-cyan-800', !esSeleccionado);
-            boton.classList.toggle('border-cyan-300', !esSeleccionado);
-
-            numero.classList.toggle('bg-white/25', esSeleccionado);
-            numero.classList.toggle('text-white', esSeleccionado);
-            numero.classList.toggle('bg-cyan-100', !esSeleccionado);
-            numero.classList.toggle('text-cyan-800', !esSeleccionado);
-        });
-    }
-
-    function obtenerDigitos(numero) {
-        return String(numero).split('').map(function (caracter) {
-            return Number(caracter);
+        motor.resaltarSeleccion(botonesNivel, function (boton) {
+            return Number(boton.dataset.nivel) === nivelSeleccionado;
         });
     }
 
     // Construye la suma columna por columna (de derecha a izquierda) y devuelve,
     // además del resultado, qué columnas recibieron una llevada para poder dibujarlas.
     function calcularSumaEnColumna(a, b) {
-        const digitosA = obtenerDigitos(a);
-        const digitosB = obtenerDigitos(b);
+        const digitosA = motor.digitos(a);
+        const digitosB = motor.digitos(b);
         const cifras = Math.max(digitosA.length, digitosB.length);
         const resultado = new Array(cifras).fill(0);
         const llevadaEntra = new Array(cifras + 1).fill(0);
@@ -181,11 +123,7 @@
         return rejilla;
     }
 
-    function abrirPopupAyuda() {
-        usoAyuda = true;
-
-        contenedorAyuda.innerHTML = '';
-
+    function construirAyuda(contenedor) {
         const envoltorio = document.createElement('div');
         envoltorio.className = 'flex flex-col items-center gap-4';
 
@@ -195,174 +133,58 @@
 
         envoltorio.appendChild(operacionOriginal);
         envoltorio.appendChild(construirVisualSuma(numeroOperacion1, numeroOperacion2));
-        contenedorAyuda.appendChild(envoltorio);
+        contenedor.appendChild(envoltorio);
 
-        subtituloAyuda.textContent = 'Suma de derecha a izquierda. Si una columna da 10 o más, el 1 naranja "se lleva" a la columna de al lado.';
-
-        popupAyuda.classList.remove('hidden');
-        popupAyuda.classList.add('flex');
+        return 'Suma de derecha a izquierda. Si una columna da 10 o más, el 1 naranja "se lleva" a la columna de al lado.';
     }
 
-    function cerrarPopupAyuda() {
-        popupAyuda.classList.add('hidden');
-        popupAyuda.classList.remove('flex');
-
-        const primeraOpcion = opcionesRespuesta.querySelector('.boton-opcion-respuesta:not(:disabled)');
-        if (primeraOpcion) {
-            primeraOpcion.focus();
-        }
-    }
-
-    function terminarPartida() {
-        MateAventuras.jugadores.registrarPartidaTerminada();
-        MateAventuras.marcador.terminarPartida(MateAventuras.jugadores.obtenerNombre());
-        mascota.textContent = '🥳';
-        MateAventuras.sonidos.partidaTerminada();
-        cerrarPopupAyuda();
-    }
-
-    function iniciarPractica() {
-        MateAventuras.uiJugadores.guardarEstado();
-        MateAventuras.marcador.reiniciarPartida();
-        usoAyuda = false;
-        huboError = false;
-        generarOperacion();
-    }
-
-    function obtenerNumeroAleatorio(minimo, maximo) {
-        return Math.floor(Math.random() * (maximo - minimo + 1)) + minimo;
-    }
-
-    function mezclarArreglo(arreglo) {
-        const copia = arreglo.slice();
-
-        for (let i = copia.length - 1; i > 0; i -= 1) {
-            const j = Math.floor(Math.random() * (i + 1));
-            const temporal = copia[i];
-            copia[i] = copia[j];
-            copia[j] = temporal;
-        }
-
-        return copia;
-    }
-
-    function obtenerNumeroConCifras(cifras) {
-        if (cifras === 1) {
-            return obtenerNumeroAleatorio(2, 9);
-        }
-
-        const minimo = Math.pow(10, cifras - 1);
-        return obtenerNumeroAleatorio(minimo, minimo * 10 - 1);
-    }
-
-    function generarOpcionesRespuesta(correcta) {
-        const a = numeroOperacion1;
-        const b = numeroOperacion2;
+    function crearRonda() {
+        const nivel = NIVELES_SUMA[nivelSeleccionado];
+        const sumando1 = motor.numeroConCifras(nivel.cifras[0]);
+        const sumando2 = motor.numeroConCifras(nivel.cifras[1]);
+        const correcta = sumando1 + sumando2;
         const magnitud = Math.pow(10, Math.max(0, String(correcta).length - 2));
+
+        numeroOperacion1 = sumando1;
+        numeroOperacion2 = sumando2;
 
         // Errores típicos: olvidar una llevada, sumar mal un dígito
         // o desplazar el resultado una decena.
         const candidatas = [
-            a + (b + 1), a + (b - 1), (a + 1) + b, (a - 1) + b,
+            sumando1 + (sumando2 + 1), sumando1 + (sumando2 - 1),
+            (sumando1 + 1) + sumando2, (sumando1 - 1) + sumando2,
             correcta + 1, correcta - 1,
             correcta + 10, correcta - 10,
             correcta + magnitud, correcta - magnitud
         ];
 
-        const opciones = new Set([correcta]);
-        mezclarArreglo(candidatas).forEach(function (candidata) {
-            if (opciones.size < 5 && candidata >= 1 && candidata !== correcta) {
-                opciones.add(candidata);
+        return {
+            texto: sumando1 + ' + ' + sumando2,
+            respuesta: correcta,
+            opciones: motor.opcionesNumericas(correcta, candidatas),
+            monedas: nivelSeleccionado
+        };
+    }
+
+    const practica = motor.crear({
+        configuracion: {
+            actual: function () {
+                return { nivelSuma: nivelSeleccionado };
+            },
+            predeterminada: function () {
+                return { nivelSuma: 1 };
+            },
+            aplicar: function (configuracion) {
+                const nivel = Number(configuracion.nivelSuma);
+                nivelSeleccionado = NIVELES_SUMA[nivel] ? nivel : 1;
+                actualizarVistaNivel();
             }
-        });
-
-        let intentos = 0;
-        while (opciones.size < 5 && intentos < 200) {
-            intentos += 1;
-            const variacion = obtenerNumeroAleatorio(-10, 10);
-            const candidata = correcta + variacion;
-
-            if (variacion !== 0 && candidata >= 1) {
-                opciones.add(candidata);
-            }
+        },
+        crearRonda: crearRonda,
+        ayuda: {
+            construir: construirAyuda
         }
-
-        return mezclarArreglo(Array.from(opciones));
-    }
-
-    function renderizarOpcionesRespuesta(correcta) {
-        opcionesRespuesta.innerHTML = '';
-
-        const opciones = generarOpcionesRespuesta(correcta);
-        const claseTamano = opciones.some(function (valor) { return String(valor).length > 4; }) ? 'text-xl' : 'text-2xl';
-
-        opciones.forEach(function (valor) {
-            const boton = document.createElement('button');
-            boton.type = 'button';
-            boton.className = 'boton-opcion-respuesta rounded-xl border-2 border-slate-300 bg-white py-4 ' + claseTamano + ' font-black text-slate-800 shadow-sm transition hover:scale-[1.03] hover:border-fuchsia-400 hover:bg-fuchsia-50';
-            boton.dataset.valor = String(valor);
-            boton.textContent = String(valor);
-            boton.addEventListener('click', function () {
-                seleccionarOpcionRespuesta(valor, boton);
-            });
-            opcionesRespuesta.appendChild(boton);
-        });
-    }
-
-    function generarOperacion() {
-        if (!MateAventuras.jugadores.obtenerActual()) {
-            return;
-        }
-
-        const nivel = NIVELES_SUMA[nivelSeleccionado];
-        const sumando1 = obtenerNumeroConCifras(nivel.cifras[0]);
-        const sumando2 = obtenerNumeroConCifras(nivel.cifras[1]);
-
-        respuestaCorrecta = sumando1 + sumando2;
-        numeroOperacion1 = sumando1;
-        numeroOperacion2 = sumando2;
-        MateAventuras.efectos.establecerTextoOperacion(operacion, sumando1 + ' + ' + sumando2);
-        renderizarOpcionesRespuesta(respuestaCorrecta);
-        usoAyuda = false;
-        huboError = false;
-        MateAventuras.uiJugadores.mostrarMascota();
-        tarjetaOperacion.classList.remove('brillar');
-        operacion.classList.remove('operacion-incorrecta');
-    }
-
-    function seleccionarOpcionRespuesta(valor, boton) {
-        if (valor === respuestaCorrecta) {
-            opcionesRespuesta.querySelectorAll('.boton-opcion-respuesta').forEach(function (b) {
-                b.disabled = true;
-            });
-            boton.classList.add('border-emerald-500', 'bg-emerald-100', 'text-emerald-700');
-
-            const partidaCompleta = MateAventuras.marcador.registrarAcierto(usoAyuda || huboError, boton, nivelSeleccionado);
-            MateAventuras.uiJugadores.guardarEstado();
-            MateAventuras.uiJugadores.renderizarLista();
-
-            mascota.textContent = '🥳';
-            mascota.classList.add('saltar');
-            tarjetaOperacion.classList.add('brillar');
-            MateAventuras.efectos.confeti(operacion);
-            MateAventuras.sonidos.acierto();
-            setTimeout(function () { mascota.classList.remove('saltar'); }, 500);
-
-            if (partidaCompleta) {
-                setTimeout(terminarPartida, 900);
-            } else {
-                setTimeout(generarOperacion, 900);
-            }
-        } else {
-            boton.disabled = true;
-            boton.classList.add('border-red-400', 'bg-red-100', 'text-red-600', 'opacity-60');
-            huboError = true;
-            MateAventuras.marcador.reiniciarRacha();
-            MateAventuras.efectos.temblorError(operacion);
-            MateAventuras.sonidos.error();
-            mascota.textContent = '🤔';
-        }
-    }
+    });
 
     botonesNivel.forEach(function (boton) {
         boton.addEventListener('click', function () {
@@ -375,39 +197,10 @@
             nivelSeleccionado = nivel;
             actualizarVistaNivel();
             MateAventuras.uiJugadores.guardarEstado();
-            generarOperacion();
+            practica.nuevaOperacion();
         });
     });
 
-    btnAyuda.addEventListener('click', abrirPopupAyuda);
-    btnCerrarAyuda.addEventListener('click', cerrarPopupAyuda);
-    popupAyuda.addEventListener('click', function (evento) {
-        if (evento.target === popupAyuda) {
-            cerrarPopupAyuda();
-        }
-    });
-
-    btnNuevaOperacion.addEventListener('click', generarOperacion);
-
-    function inicializar() {
-        MateAventuras.marcador.iniciar({
-            alSiguientePartida: function () {
-                usoAyuda = false;
-                huboError = false;
-                generarOperacion();
-            }
-        });
-
-        MateAventuras.uiJugadores.iniciar({
-            obtenerConfiguracion: obtenerConfiguracionActual,
-            obtenerConfiguracionPredeterminada: obtenerConfiguracionPredeterminada,
-            aplicarConfiguracion: aplicarConfiguracionJugador,
-            alEmpezarPractica: iniciarPractica
-        });
-
-        actualizarVistaNivel();
-        MateAventuras.uiJugadores.inicializarJugador();
-    }
-
-    inicializar();
+    actualizarVistaNivel();
+    practica.iniciar();
 })();

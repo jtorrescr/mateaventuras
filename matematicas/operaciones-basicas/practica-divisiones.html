@@ -13,14 +13,14 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mate Aventuras - Práctica de Sumas para Niños de Escuela Primaria</title>
+    <title>Mate Aventuras - Práctica de Divisiones para Niños de Escuela Primaria</title>
     <meta name="description"
-        content="Mate Aventuras: practica sumas de 1, 2 y 3 cifras con niveles de dificultad y ayuda visual de suma en columna. Ideal para niños de primaria." />
-    <meta property="og:title" content="Mate Aventuras - Práctica de Sumas" />
+        content="Mate Aventuras: practica divisiones exactas y con residuo por niveles, con ayuda visual de la división en caja paso a paso. Ideal para niños de primaria." />
+    <meta property="og:title" content="Mate Aventuras - Práctica de Divisiones" />
     <meta property="og:description"
-        content="Practica sumas de una, dos y tres cifras con seguimiento de progreso. Gratis para niños de primaria." />
+        content="Practica divisiones exactas y con residuo con seguimiento de progreso. Gratis para niños de primaria." />
     <meta property="og:type" content="website" />
-    <link rel="canonical" href="https://mateaventuras.com/matematicas/operaciones-basicas/practica-sumas.html" />
+    <link rel="canonical" href="https://mateaventuras.com/matematicas/operaciones-basicas/practica-divisiones.html" />
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>" />
     <link rel="stylesheet" href="../../assets/css/estilos.css" />
@@ -71,7 +71,7 @@
 
         <section id="pantallaPractica"
             class="rounded-2xl border border-white/70 bg-white/85 p-7 shadow-lg backdrop-blur">
-            <h2 class="text-sm font-black uppercase tracking-wide text-emerald-700">Sumas</h2>
+            <h2 class="text-sm font-black uppercase tracking-wide text-emerald-700">Divisiones</h2>
 
             <div class="mt-6 grid gap-5 lg:grid-cols-[1fr_1.3fr]">
                 <aside class="rounded-2xl bg-gradient-to-br from-emerald-50 to-cyan-50 p-5">
@@ -115,8 +115,8 @@
                                 <span
                                     class="nivel-numero flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 font-black text-cyan-800">1</span>
                                 <span class="flex-1">
-                                    <span class="block text-lg font-black leading-tight">7 + 8</span>
-                                    <span class="block text-xs font-bold opacity-70">1 cifra + 1 cifra</span>
+                                    <span class="block text-lg font-black leading-tight">24 ÷ 4</span>
+                                    <span class="block text-xs font-bold opacity-70">Tablas fáciles, exacta</span>
                                 </span>
                             </button>
                             <button
@@ -125,8 +125,8 @@
                                 <span
                                     class="nivel-numero flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 font-black text-cyan-800">2</span>
                                 <span class="flex-1">
-                                    <span class="block text-lg font-black leading-tight">7 + 48</span>
-                                    <span class="block text-xs font-bold opacity-70">1 cifra + 2 cifras</span>
+                                    <span class="block text-lg font-black leading-tight">56 ÷ 7</span>
+                                    <span class="block text-xs font-bold opacity-70">Todas las tablas, exacta</span>
                                 </span>
                             </button>
                             <button
@@ -135,8 +135,8 @@
                                 <span
                                     class="nivel-numero flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 font-black text-cyan-800">3</span>
                                 <span class="flex-1">
-                                    <span class="block text-lg font-black leading-tight">37 + 48</span>
-                                    <span class="block text-xs font-bold opacity-70">2 cifras + 2 cifras</span>
+                                    <span class="block text-lg font-black leading-tight">344 ÷ 8</span>
+                                    <span class="block text-xs font-bold opacity-70">3 cifras ÷ 1 cifra, exacta</span>
                                 </span>
                             </button>
                             <button
@@ -145,8 +145,8 @@
                                 <span
                                     class="nivel-numero flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 font-black text-cyan-800">4</span>
                                 <span class="flex-1">
-                                    <span class="block text-lg font-black leading-tight">37 + 486</span>
-                                    <span class="block text-xs font-bold opacity-70">2 cifras + 3 cifras</span>
+                                    <span class="block text-lg font-black leading-tight">59 ÷ 7</span>
+                                    <span class="block text-xs font-bold opacity-70">Con residuo</span>
                                 </span>
                             </button>
                             <button
@@ -155,13 +155,13 @@
                                 <span
                                     class="nivel-numero flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 font-black text-cyan-800">5</span>
                                 <span class="flex-1">
-                                    <span class="block text-lg font-black leading-tight">374 + 486</span>
-                                    <span class="block text-xs font-bold opacity-70">3 cifras + 3 cifras</span>
+                                    <span class="block text-lg font-black leading-tight">487 ÷ 6</span>
+                                    <span class="block text-xs font-bold opacity-70">3 cifras, con residuo</span>
                                 </span>
                             </button>
                         </div>
-                        <p id="nivelSeleccionadoTexto" class="mt-2 text-sm font-bold text-fuchsia-700">Nivel 1: 1 cifra
-                            + 1 cifra</p>
+                        <p id="nivelSeleccionadoTexto" class="mt-2 text-sm font-bold text-fuchsia-700">Nivel 1: Tablas
+                            fáciles, exacta</p>
                     </div>
                 </aside>
 
@@ -171,7 +171,7 @@
                         <div class="flex gap-2">
                             <button id="btnAyuda"
                                 class="rounded-xl border border-cyan-300 bg-cyan-50 px-3 py-2 text-lg font-black text-cyan-800 shadow-sm transition hover:bg-cyan-100"
-                                aria-label="Ayuda de suma en columna" title="Ver la suma en columna">
+                                aria-label="Ayuda de división en caja" title="Ver la división en caja">
                                 💡
                             </button>
                             <button id="btnNuevaOperacion"
@@ -203,11 +203,11 @@
                     </div>
                     <div id="operacion"
                         class="operacion-con-confeti mb-5 rounded-2xl border border-slate-200 bg-white px-6 py-8 text-center text-4xl font-black text-slate-900 sm:text-5xl md:text-6xl">
-                        <span class="texto-operacion">5 + 3</span>
+                        <span class="texto-operacion">24 ÷ 4</span>
                     </div>
 
                     <p class="mb-2 block font-bold text-slate-700">Tu respuesta</p>
-                    <div id="opcionesRespuesta" class="grid grid-cols-2 gap-3 sm:grid-cols-5" role="group"
+                    <div id="opcionesRespuesta" class="grid grid-cols-2 gap-3 sm:grid-cols-3" role="group"
                         aria-label="Opciones de respuesta"></div>
                 </div>
             </div>
@@ -219,7 +219,7 @@
         <div class="max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl md:p-8">
             <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                    <h2 id="tituloAyuda" class="text-2xl font-black text-cyan-700">Suma en columna</h2>
+                    <h2 id="tituloAyuda" class="text-2xl font-black text-cyan-700">División en caja</h2>
                     <p id="subtituloAyuda" class="text-sm font-semibold text-slate-600"></p>
                 </div>
                 <button id="btnCerrarAyuda"
@@ -236,7 +236,7 @@
     <script src="../../assets/js/marcador.js"></script>
     <script src="../../assets/js/ui-jugadores.js"></script>
     <script src="../../assets/js/practicas/motor.js"></script>
-    <script src="../../assets/js/practicas/sumas.js"></script>
+    <script src="../../assets/js/practicas/divisiones.js"></script>
 </body>
 
 </html>
